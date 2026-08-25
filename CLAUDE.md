@@ -36,7 +36,9 @@ includes that source set only when the jars are present in `libs/` (git-ignored)
 `-PnaturalOneLibDir=...`; pass `-PndvEnabled=false` to force a core-only build. Gradle logs which
 mode it chose. Released builds are always core-only.
 
-**`src/main/` must never reference `com.softwareag`** — CI fails the build if it does.
+**`src/main/` must never reference `com.softwareag`.** Verify with
+`grep -r com.softwareag src/main/` — it must return nothing, otherwise a default build breaks
+for anyone without the proprietary libraries.
 
 Run configurations in `.run/` can also be used directly from IntelliJ.
 

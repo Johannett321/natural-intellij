@@ -6,7 +6,6 @@
 
 **IDE support for Software AG's Natural programming language**
 
-[![Build](https://github.com/Johannett321/natural-intellij/actions/workflows/build.yml/badge.svg)](https://github.com/Johannett321/natural-intellij/actions/workflows/build.yml)
 [![Release](https://img.shields.io/github/v/release/Johannett321/natural-intellij?style=flat-square&color=brightgreen)](https://github.com/Johannett321/natural-intellij/releases/latest)
 [![Platform](https://img.shields.io/badge/IntelliJ-2025.2%2B-blue?style=flat-square&logo=jetbrains)](https://www.jetbrains.com/idea/)
 [![JDK](https://img.shields.io/badge/JDK-21-orange?style=flat-square&logo=openjdk)](https://openjdk.org/projects/jdk/21/)

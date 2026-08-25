@@ -70,7 +70,8 @@ A few hard rules:
 - **Adding a keyword touches three files** — `Natural.bnf`, `Natural.flex` and
   `lexer/NaturalTokenTypes.kt`. Miss the third and it will not highlight.
 - **Never commit anything to `src/main/` that references `com.softwareag`.** That code belongs in
-  `src/ndv/`. CI enforces this.
+  `src/ndv/`. Check with `grep -r com.softwareag src/main/` before you push — it must return
+  nothing, or a default build stops working for everyone without a NaturalONE licence.
 - **Never commit the Software AG jars, or protocol captures.** `.gitignore` covers `libs/`,
   `wiresharkdumps/`, `*.pcap` and `*.pcapng`; please keep it that way.
 
@@ -86,7 +87,7 @@ bulk parser over it **before and after** your change and compare the error count
 
 This is the only reliable way to catch a fix that breaks something else — and grammar changes do
 that often, because alternative ordering has non-local effects. Without the property the test
-prints a notice and passes, so CI stays green.
+prints a notice and passes, so it is safe to run with no corpus configured.
 
 ### Style
 
