@@ -1,0 +1,243 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+    <id>com.appweb.natural.intellij</id>
+    <name>Natural Language Support</name>
+    <vendor>Johan Svartdal</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
+
+    <resource-bundle>messages.NaturalBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="NaturalDoc"
+                    anchor="right"
+                    secondary="false"
+                    icon="/icons/naturalDoc.svg"
+                    factoryClass="com.appweb.natural.intellij.toolwindow.NaturalDocToolWindowFactory"/>
+        <toolWindow id="SoftwareAgDoc"
+                    anchor="right"
+                    secondary="false"
+                    icon="/icons/naturalRefDoc.svg"
+                    factoryClass="com.appweb.natural.intellij.toolwindow.SoftwareAgDocToolWindowFactory"/>
+        <toolWindow id="NaturalDependencies"
+                    anchor="bottom"
+                    secondary="false"
+                    icon="/icons/naturalDependency.svg"
+                    factoryClass="com.appweb.natural.intellij.toolwindow.NaturalDependencyToolWindowFactory"/>
+
+        <fileType name="Natural Program"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalProgramFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSP;nsp"/>
+
+        <fileType name="Natural SubProgram"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalSubProgramFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSN;nsn"/>
+
+        <fileType name="Natural CopyCode"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalCopyCodeFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSC;nsc"/>
+
+        <fileType name="Natural DDM"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalDDMFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSD;nsd"/>
+
+        <fileType name="Natural GDA"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalGDAFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSG;nsg"/>
+
+        <fileType name="Natural LDA"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalLDAFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSL;nsl"/>
+
+        <fileType name="Natural Map"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalMapFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSM;nsm"/>
+
+        <fileType name="Natural PDA (NSA)"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalSubprogramParameterFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSA;nsa"/>
+
+        <fileType name="Natural SubRoutine"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalSubRoutineFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NSS;nss"/>
+
+        <fileType name="Natural Text"
+                  implementationClass="com.appweb.natural.intellij.language.filetypes.NaturalTextFileType"
+                  fieldName="INSTANCE"
+                  language="Natural"
+                  extensions="NST;nst"/>
+
+        <lang.parserDefinition
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.parser.NaturalParserDefinition"/>
+
+        <lang.syntaxHighlighterFactory
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.highlighting.NaturalSyntaxHighlighterFactory"/>
+
+        <completion.contributor
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.completion.NaturalCompletionContributor" />
+
+        <gotoDeclarationHandler
+            implementation="com.appweb.natural.intellij.reference.NaturalGotoDeclarationHandler"/>
+
+        <lang.findUsagesProvider
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.reference.NaturalFindUsagesProvider"/>
+
+        <lang.refactoringSupport
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.reference.NaturalRefactoringSupportProvider"/>
+
+        <lang.namesValidator
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.reference.NaturalNamesValidator"/>
+
+        <renamePsiElementProcessor
+            implementation="com.appweb.natural.intellij.reference.NaturalSubroutineRenamePsiElementProcessor"/>
+
+        <renamePsiElementProcessor
+            implementation="com.appweb.natural.intellij.reference.NaturalVariableRenamePsiElementProcessor"/>
+
+        <psi.referenceContributor
+            language="Natural"
+            implementation="com.appweb.natural.intellij.reference.NaturalDataAreaReferenceContributor"/>
+
+        <psi.referenceContributor
+            language="Natural"
+            implementation="com.appweb.natural.intellij.reference.NaturalCallnatReferenceContributor"/>
+
+        <iconProvider
+            implementation="com.appweb.natural.intellij.steplib.NaturalConfigIconProvider"/>
+
+        <lang.documentationProvider
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.documentation.NaturalDocumentationProvider"/>
+
+        <lang.foldingBuilder
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.folding.NaturalFoldingBuilder"/>
+
+        <lang.psiStructureViewFactory
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.structure.NaturalStructureViewFactory"/>
+
+        <lang.formatter
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.formatting.NaturalFormattingModelBuilder"/>
+
+        <langCodeStyleSettingsProvider
+            implementation="com.appweb.natural.intellij.formatting.NaturalLanguageCodeStyleSettingsProvider"/>
+
+        <fileEditorProvider implementation="com.appweb.natural.intellij.mapeditor.NaturalMapEditorProvider"/>
+
+        <fileBasedIndex implementation="com.appweb.natural.intellij.index.NaturalCallnatIndex"/>
+        <fileBasedIndex implementation="com.appweb.natural.intellij.index.NaturalDataAreaUsageIndex"/>
+
+        <findUsagesHandlerFactory
+            implementation="com.appweb.natural.intellij.findusages.NaturalModuleFindUsagesHandlerFactory"/>
+
+        <annotator
+            language="Natural"
+            implementationClass="com.appweb.natural.intellij.annotator.NaturalAnnotator"/>
+
+        <intentionAction>
+            <language>Natural</language>
+            <className>com.appweb.natural.intellij.intentions.GenerateSubroutineIntentionAction</className>
+            <category>Natural</category>
+        </intentionAction>
+
+        <intentionAction>
+            <language>Natural</language>
+            <className>com.appweb.natural.intellij.intentions.GenerateVariableIntentionAction</className>
+            <category>Natural</category>
+        </intentionAction>
+
+        <intentionAction>
+            <language>Natural</language>
+            <className>com.appweb.natural.intellij.intentions.ExtractSubroutineIntentionAction</className>
+            <category>Natural</category>
+        </intentionAction>
+
+        <intentionAction>
+            <language>Natural</language>
+            <className>com.appweb.natural.intellij.intentions.ExtractSubprogramIntentionAction</className>
+            <category>Natural</category>
+        </intentionAction>
+
+        <projectViewNodeDecorator
+            implementation="com.appweb.natural.intellij.nickname.NaturalProjectViewDecorator"/>
+
+        <editorTabTitleProvider
+            implementation="com.appweb.natural.intellij.nickname.NaturalEditorTabTitleProvider"/>
+
+        <searchEverywhereContributor
+            implementation="com.appweb.natural.intellij.nickname.NaturalNicknameSearchContributorFactory"/>
+
+        <fileEditorProvider implementation="com.appweb.natural.intellij.mapeditor.NaturalMapEditorProvider"/>
+
+        <toolWindow id="Natural Run"
+                    anchor="bottom"
+                    factoryClass="com.appweb.natural.intellij.run.NaturalRunToolWindowFactory"
+                    icon="/icons/naturalProgram.svg"/>
+
+        <configurationType implementation="com.appweb.natural.intellij.run.NaturalRunConfigurationType"/>
+        <runConfigurationProducer implementation="com.appweb.natural.intellij.run.NaturalRunConfigurationProducer"/>
+
+        <notificationGroup id="Natural.Server"
+                           displayType="BALLOON"
+                           isLogByDefault="true"/>
+
+        <moduleType id="NATURAL_MODULE_TYPE"
+                    implementationClass="com.appweb.natural.intellij.module.NaturalModuleType"/>
+    </extensions>
+
+    <actions>
+        <action id="Natural.NewObject"
+                class="com.appweb.natural.intellij.actions.NewNaturalFileAction"
+                text="Natural Object"
+                icon="/icons/naturalProgram.svg">
+            <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFile"/>
+        </action>
+        <action id="Natural.SetNickname"
+                class="com.appweb.natural.intellij.nickname.SetNicknameAction"
+                text="Set Nickname...">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+        <action id="Natural.CreateDoc"
+                class="com.appweb.natural.intellij.actions.NaturalDocAction"
+                text="Go to NaturalDoc">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+    </actions>
+
+    <!--
+      Natural Development Server integration. Present only in builds made with the Software AG
+      NaturalONE client libraries available locally; <xi:fallback/> makes this a no-op otherwise.
+    -->
+    <xi:include href="/META-INF/natural-ndv.xml" xpointer="xpointer(/idea-plugin/*)">
+        <xi:fallback/>
+    </xi:include>
+</idea-plugin>

@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g. 1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Verify no proprietary dependencies
+        run: |
+          if grep -rq "com\.softwareag" src/main/; then
+            echo "::error::src/main references com.softwareag - refusing to release"
+            exit 1
+          fi
+          if git ls-files | grep -qiE "com\.softwareag.*\.jar|\.pcapng?$"; then
+            echo "::error::proprietary jars or protocol captures are committed - refusing to release"
+            exit 1
+          fi
+
+      # Released builds are always core-only: they must never bundle Software AG libraries.
+      - name: Build plugin
+        run: ./gradlew buildPlugin -PndvEnabled=false
+
+      - name: Extract release notes
+        id: notes
+        run: |
+          ./gradlew getChangelog --unreleased --no-header --console=plain -q > RELEASE_NOTES.md || true
+          if [ ! -s RELEASE_NOTES.md ]; then
+            echo "See CHANGELOG.md for details." > RELEASE_NOTES.md
+          fi
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/distributions/*.zip
+          body_path: RELEASE_NOTES.md
+          generate_release_notes: true
+          draft: false

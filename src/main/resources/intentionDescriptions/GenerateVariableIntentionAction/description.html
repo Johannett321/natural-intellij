@@ -1,0 +1,17 @@
+<html>
+<body>
+Adds a missing variable declaration to the <code>DEFINE DATA</code> section.
+<br><br>
+Place the caret on an unresolved variable reference and invoke this intention to jump to the
+correct location and insert a new variable declaration with a live-editable data type.
+<br><br>
+<b>Simple variable</b> (e.g. <code>#COUNTER</code>) &mdash; inserts a level-1 declaration
+into the first inline block (<code>LOCAL</code>, <code>GLOBAL</code>, or <code>PARAMETER</code>)
+of the current file.
+<br><br>
+<b>Qualified variable</b> (e.g. <code>SAK.VARNAME</code>) &mdash; locates the group
+<code>SAK</code> in the current file or in an imported data area file
+(<code>LOCAL USING SAK</code>), then inserts the new field at the correct nesting level
+directly in that file.
+</body>
+</html>

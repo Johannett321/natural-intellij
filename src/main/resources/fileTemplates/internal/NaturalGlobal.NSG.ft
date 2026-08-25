@@ -1,0 +1,8 @@
+DEFINE DATA GLOBAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+1 VARIABLE
+    2 CHILD-VARIABLE (A12)
+END-DEFINE

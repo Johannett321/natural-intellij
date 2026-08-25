@@ -1,0 +1,53 @@
+Natural for IntelliJ
+Copyright 2026 Johan Svartdal
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+================================================================================
+Trademarks
+================================================================================
+
+Natural, NaturalONE, Adabas and Software AG are trademarks or registered
+trademarks of Software AG and/or its successors. IntelliJ, IntelliJ IDEA and
+JetBrains are trademarks of JetBrains s.r.o.
+
+This project is an independent effort. It is not affiliated with, endorsed by,
+or supported by Software AG, IBM or JetBrains. Product names are used only to
+identify the software this plugin interoperates with.
+
+================================================================================
+Bundled third-party components
+================================================================================
+
+flexmark-java
+  Copyright (c) 2016-2018, Vladimir Schneider
+  BSD 2-Clause License
+  https://github.com/vsch/flexmark-java
+
+ICU4J (optional, only in builds with NDV server support)
+  Copyright (c) 1991-2020 Unicode, Inc.
+  Unicode License Agreement
+  https://github.com/unicode-org/icu
+
+The IntelliJ Platform is provided by JetBrains under the Apache License 2.0 and
+is not redistributed with this plugin.
+
+This project's build configuration was originally scaffolded from the JetBrains
+IntelliJ Platform Plugin Template, also Apache License 2.0.
+  https://github.com/JetBrains/intellij-platform-plugin-template
+
+================================================================================
+Components deliberately NOT included
+================================================================================
+
+The optional Natural Development Server module compiles against Software AG's
+proprietary NaturalONE client libraries:
+
+  com.softwareag.naturalone.natural.ndvserveraccess
+  com.softwareag.naturalone.natural.auxiliary
+  com.softwareag.natural.tools
+
+These libraries are NOT part of this repository and are NOT included in any
+published release of this plugin. They must be supplied from a licensed
+NaturalONE installation by whoever builds that optional module, and must not be
+redistributed. See docs/ndv-integration.md.

@@ -1,0 +1,26 @@
+# --- Build output -------------------------------------------------------------
+build/
+out/
+.gradle/
+.kotlin/
+.qodana/
+hs_err_*
+
+# --- IDE / tooling ------------------------------------------------------------
+.idea/
+.intellijPlatform/
+*.iml
+.DS_Store
+
+# --- Proprietary third-party libraries ---------------------------------------
+# Software AG NaturalONE client jars are required only for the optional NDV server
+# module and must never be committed or redistributed. Place them here locally, or
+# point Gradle at a NaturalONE installation with -PnaturalOneLibDir=...
+# See README.md -> "Building with NDV server support".
+libs/
+
+# --- Local analysis artefacts -------------------------------------------------
+# Protocol captures: these record live server sessions (hostnames, user IDs, payloads).
+wiresharkdumps/
+*.pcap
+*.pcapng

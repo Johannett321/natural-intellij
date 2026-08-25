@@ -1,0 +1,22 @@
+// This is a generated file. Not intended for manual editing.
+package com.appweb.natural.intellij.psi;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.psi.PsiElement;
+
+public interface NaturalAndCondition extends PsiElement {
+
+  @NotNull
+  List<NaturalAddExpr> getAddExprList();
+
+  @NotNull
+  List<NaturalAndCondition> getAndConditionList();
+
+  @NotNull
+  List<NaturalCompOp> getCompOpList();
+
+  @NotNull
+  List<NaturalNotCondition> getNotConditionList();
+
+}

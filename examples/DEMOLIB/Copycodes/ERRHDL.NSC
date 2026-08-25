@@ -1,0 +1,9 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+* Shared error reporting block. INCLUDE this inside an ON ERROR block.
+WRITE 'Unexpected error' *ERROR-NR
+  / 'in line' *ERROR-LINE
+  / 'program' *PROGRAM

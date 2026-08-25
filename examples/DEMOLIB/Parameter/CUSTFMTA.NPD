@@ -1,0 +1,13 @@
+DEFINE DATA PARAMETER
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+/** Parameter data area for CUSTFMT-N.
+1 P-FIRST-NAME   (A20) BY VALUE
+1 P-LAST-NAME    (A30) BY VALUE
+1 P-BALANCE      (P9.2) BY VALUE
+1 P-FULL-NAME    (A52)
+1 P-AMOUNT-TEXT  (A20)
+1 P-RETURN-CODE  (I2)
+END-DEFINE

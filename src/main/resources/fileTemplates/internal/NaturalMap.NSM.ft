@@ -1,0 +1,21 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+* MAP2: PROTOTYPE              --- CREATED BY Natural Plugin ---
+* INPUT USING MAP '${NAME}'
+DEFINE DATA PARAMETER
+1  CV-MAP (C)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=ON  IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 023080                                                                *
+************************************************************************
+INPUT          (     CV=CV-MAP                                        /*
+                                                                       )
+ 001T 'Map title'
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

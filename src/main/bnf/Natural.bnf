@@ -1,0 +1,1370 @@
+{
+    parserClass="com.appweb.natural.intellij.parser.NaturalParser"
+    parserUtilClass="com.appweb.natural.intellij.parser.NaturalParserUtil"
+
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="Natural"
+    psiImplClassSuffix="Impl"
+    psiPackage="com.appweb.natural.intellij.psi"
+    psiImplPackage="com.appweb.natural.intellij.psi.impl"
+
+    elementTypeHolderClass="com.appweb.natural.intellij.psi.NaturalTypes"
+    elementTypeClass="com.appweb.natural.intellij.psi.NaturalElementType"
+    tokenTypeClass="com.appweb.natural.intellij.psi.NaturalTokenType"
+    psiImplUtilClass="com.appweb.natural.intellij.psi.NaturalPsiImplUtil"
+
+    tokens=[
+      // Comments
+      LINE_COMMENT      = "LINE_COMMENT"
+
+      // Literals
+      STRING_LITERAL = "STRING_LITERAL"
+      NUMBER = "NUMBER"
+      DATE_LITERAL = "DATE_LITERAL"
+      TIME_LITERAL = "TIME_LITERAL"
+      TIMESTAMP_LITERAL = "TIMESTAMP_LITERAL"
+      HEX_LITERAL = "HEX_LITERAL"
+      UNICODE_HEX_LITERAL = "UNICODE_HEX_LITERAL"
+
+      // Identifiers
+      USER_VARIABLE = "USER_VARIABLE"
+      SYSTEM_VARIABLE = "SYSTEM_VARIABLE"
+      IDENTIFIER = "IDENTIFIER"
+
+      // Structural
+      LEVEL_NUMBER = "LEVEL_NUMBER"
+      DATA_TYPE_SPEC = "DATA_TYPE_SPEC"
+
+      // Block terminators
+      KW_END_IF = "END-IF"
+      KW_END_FOR = "END-FOR"
+      KW_END_REPEAT = "END-REPEAT"
+      KW_END_DECIDE = "END-DECIDE"
+      KW_END_DEFINE     = "END-DEFINE"
+      KW_END_SUBROUTINE = "END-SUBROUTINE"
+      KW_END_FUNCTION = "END-FUNCTION"
+      KW_END_READ = "END-READ"
+      KW_END_FIND = "END-FIND"
+      KW_END_SORT = "END-SORT"
+      KW_END_BREAK = "END-BREAK"
+      KW_END_ENDDATA = "END-ENDDATA"
+      KW_END_ENDFILE = "END-ENDFILE"
+      KW_END_ENDPAGE = "END-ENDPAGE"
+      KW_END_ALL = "END-ALL"
+      KW_END_BEFORE = "END-BEFORE"
+      KW_END_START = "END-START"
+      KW_END_TOPPAGE = "END-TOPPAGE"
+      KW_END_ERROR = "END-ERROR"
+      KW_END_TRANSACTION = "END-TRANSACTION"
+      KW_END_NOREC = "END-NOREC"
+      KW_END_WORK = "END-WORK"
+      KW_END            = "END"
+
+      // DEFINE openers
+      KW_DEFINE_DATA    = "DEFINE DATA"
+      KW_DEFINE         = "DEFINE"
+      KW_SUBROUTINE     = "SUBROUTINE"
+      KW_DEFINE_FUNCTION = "DEFINE FUNCTION"
+      KW_DEFINE_PRINTER = "DEFINE PRINTER"
+      KW_DEFINE_WINDOW = "DEFINE WINDOW"
+      KW_DEFINE_WORK_FILE = "DEFINE WORK FILE"
+      KW_DEFINE_PROTOTYPE = "DEFINE PROTOTYPE"
+      KW_DEFINE_CLASS = "DEFINE CLASS"
+
+      // Control flow
+      KW_IF = "IF"
+      KW_THEN = "THEN"
+      KW_ELSE = "ELSE"
+      KW_FOR = "FOR"
+      KW_REPEAT = "REPEAT"
+      KW_WHILE = "WHILE"
+      KW_UNTIL = "UNTIL"
+      KW_DECIDE = "DECIDE"
+      KW_WHEN = "WHEN"
+      KW_ESCAPE = "ESCAPE"
+      KW_PERFORM = "PERFORM"
+      KW_LOOP = "LOOP"
+      KW_FETCH = "FETCH"
+      KW_STOP = "STOP"
+      KW_TERMINATE = "TERMINATE"
+
+      // Data access
+      KW_READ = "READ"
+      KW_FIND = "FIND"
+      KW_STORE = "STORE"
+      KW_UPDATE = "UPDATE"
+      KW_DELETE = "DELETE"
+      KW_GET = "GET"
+      KW_SORT    = "SORT"
+      KW_THEM    = "THEM"
+      KW_GIVE    = "GIVE"
+      KW_KEYS    = "KEYS"
+      KW_MAX     = "MAX"
+      KW_MIN     = "MIN"
+      KW_NMIN    = "NMIN"
+      KW_COUNT   = "COUNT"
+      KW_NCOUNT  = "NCOUNT"
+      KW_OLD     = "OLD"
+      KW_AVER    = "AVER"
+      KW_NAVER   = "NAVER"
+      KW_SUM     = "SUM"
+      KW_TOTAL   = "TOTAL"
+      KW_HISTOGRAM = "HISTOGRAM"
+
+      // I/O
+      KW_WRITE = "WRITE"
+      KW_DISPLAY = "DISPLAY"
+      KW_PRINT = "PRINT"
+      KW_INPUT = "INPUT"
+      KW_REINPUT = "REINPUT"
+      KW_SKIP = "SKIP"
+      KW_NEWPAGE = "NEWPAGE"
+      KW_EJECT = "EJECT"
+      KW_FORMAT = "FORMAT"
+
+      // Data manipulation
+      KW_MASK       = "MASK"
+      KW_RIGHT      = "RIGHT"
+      KW_LEFT       = "LEFT"
+      KW_JUSTIFIED  = "JUSTIFIED"
+      KW_NORMALIZED = "NORMALIZED"
+      KW_ENCODED    = "ENCODED"
+      KW_POSITION   = "POSITION"
+      KW_MOVE       = "MOVE"
+      KW_ASSIGN     = "ASSIGN"
+      KW_COMPUTE    = "COMPUTE"
+      KW_ADD        = "ADD"
+      KW_SUBTRACT   = "SUBTRACT"
+      KW_MULTIPLY   = "MULTIPLY"
+      KW_DIVIDE     = "DIVIDE"
+      KW_COMPRESS   = "COMPRESS"
+      KW_EXAMINE    = "EXAMINE"
+      KW_SEPARATE   = "SEPARATE"
+      KW_TRANSLATE  = "TRANSLATE"
+      KW_RESET      = "RESET"
+      KW_REDUCE     = "REDUCE"
+      KW_EXPAND     = "EXPAND"
+      KW_ARRAY      = "ARRAY"
+      KW_RESIZE     = "RESIZE"
+      KW_STACK      = "STACK"
+
+      // Calls
+      KW_CALLNAT = "CALLNAT"
+      KW_CALL    = "CALL"
+      KW_RUN     = "RUN"
+      KW_INCLUDE = "INCLUDE"
+
+      // Data defintion
+      KW_LOCAL = "LOCAL"
+      KW_GLOBAL = "GLOBAL"
+      KW_PARAMETER = "PARAMETER"
+      KW_INDEPENDENT = "INDEPENDENT"
+      KW_CONTEXT = "CONTEXT"
+      KW_USING = "USING"
+      KW_VIEW = "VIEW"
+      KW_REDEFINE = "REDEFINE"
+      KW_CONST = "CONST"
+      KW_DYNAMIC = "DYNAMIC"
+      KW_INIT = "INIT"
+      KW_INITIAL = "INITIAL"
+      KW_RETURNS = "RETURNS"
+      KW_HANDLE_OF = "HANDLE OF"
+
+      // Clauses
+      KW_TO = "TO"
+      KW_FROM = "FROM"
+      KW_THRU = "THRU"
+      KW_BY = "BY"
+      KW_VALUES = "VALUES"
+      KW_VALUE = "VALUE"
+      KW_OF = "OF"
+      KW_IN = "IN"
+      KW_AT = "AT"
+      KW_BREAK = "BREAK"
+      KW_BEFORE = "BEFORE"
+      KW_PROCESSING = "PROCESSING"
+      KW_PROCESS    = "PROCESS"
+      KW_COMMAND    = "COMMAND"
+      KW_REQUEST    = "REQUEST"
+      KW_DOCUMENT   = "DOCUMENT"
+      KW_STARTING = "STARTING"
+      KW_ENDING = "ENDING"
+      KW_WHERE = "WHERE"
+      KW_LIMIT = "LIMIT"
+      KW_WITH = "WITH"
+      KW_INTO = "INTO"
+      KW_GIVING = "GIVING"
+      KW_ALL = "ALL"
+      KW_FIRST = "FIRST"
+      KW_NONE = "NONE"
+      KW_ON = "ON"
+      KW_DATA = "DATA"
+      KW_STEP = "STEP"
+      KW_BOTTOM = "BOTTOM"
+      KW_TOP = "TOP"
+      KW_ROUTINE = "ROUTINE"
+      KW_MODULE = "MODULE"
+      KW_IMMEDIATE = "IMMEDIATE"
+      KW_PAGE = "PAGE"
+      KW_START = "START"
+      KW_ROUNDED = "ROUNDED"
+      KW_NAME = "NAME"
+      KW_IGNORE = "IGNORE"
+      KW_REMAINDER = "REMAINDER"
+      KW_OPTIONS = "OPTIONS"
+      KW_PHYSICAL = "PHYSICAL"
+      KW_SEQUENCE = "SEQUENCE"
+      KW_LOGICAL = "LOGICAL"
+      KW_ASCENDING   = "ASCENDING"
+      KW_DESCENDING  = "DESCENDING"
+      KW_REPOSITION  = "REPOSITION"
+      KW_SHARED      = "SHARED"
+      KW_HOLD        = "HOLD"
+      KW_MODE        = "MODE"
+      KW_SPACES    = "SPACES"
+      KW_LEAVING   = "LEAVING"
+      KW_NO        = "NO"
+      KW_SPACE     = "SPACE"
+      KW_REPLACE   = "REPLACE"
+      KW_DELIMITER  = "DELIMITER"
+      KW_DELIMITERS = "DELIMITERS"
+      KW_PATTERN    = "PATTERN"
+      KW_DIRECTION  = "DIRECTION"
+      KW_BACKWARD   = "BACKWARD"
+      KW_FORWARD    = "FORWARD"
+      KW_WORK      = "WORK"
+      KW_FILE      = "FILE"
+      KW_CLOSE     = "CLOSE"
+      KW_DOWNLOAD  = "DOWNLOAD"
+      KW_SCAN      = "SCAN"
+      KW_RESULT    = "RESULT"
+      KW_OPTIONAL  = "OPTIONAL"
+      KW_SUBSTRING = "SUBSTRING"
+      KW_LINES     = "LINES"
+      KW_SAME      = "SAME"
+      KW_DO        = "DO"
+      KW_DOEND     = "DOEND"
+      KW_KEY       = "KEY"
+      KW_SV_TRANSLATE = "*TRANSLATE"
+      KW_SPECIFIED = "SPECIFIED"
+      KW_SELECT    = "SELECT"
+      KW_EDITED    = "EDITED"
+      KW_END_HISTOGRAM = "END-HISTOGRAM"
+      KW_ON_COMMA_ERROR = "KW_ON_COMMA_ERROR"
+
+      // Transaction
+      KW_ON_ERROR = "ON ERROR"
+      KW_BACKOUT = "BACKOUT"
+      KW_COMMIT = "COMMIT"
+      KW_REJECT = "REJECT"
+      KW_ACCEPT = "ACCEPT"
+      KW_RETRY = "RETRY"
+      KW_RELEASE = "RELEASE"
+      KW_TRANSACTION = "TRANSACTION"
+      KW_ISN         = "ISN"
+      KW_VARIABLE    = "VARIABLE"
+      KW_RECORDS     = "RECORDS"
+      KW_PASSWORD    = "PASSWORD"
+      KW_CIPHER      = "CIPHER"
+      KW_MULTI_FETCH = "MULTI-FETCH"
+      KW_OFF         = "OFF"
+      KW_NUMBER      = "KW_NUMBER"
+      KW_UNIQUE      = "UNIQUE"
+      KW_COUPLED     = "COUPLED"
+      KW_VIA         = "VIA"
+      KW_SORTED      = "SORTED"
+      KW_RETAIN      = "RETAIN"
+      KW_AS          = "AS"
+      KW_FOUND       = "FOUND"
+      KW_BUT         = "BUT"
+      KW_ENTER       = "ENTER"
+      KW_EVERY       = "EVERY"
+      KW_CONDITION   = "CONDITION"
+      KW_ANY         = "ANY"
+      KW_ERASE       = "ERASE"
+      KW_MAP         = "MAP"
+      KW_ALARM       = "ALARM"
+      KW_HELP        = "HELP"
+      KW_MARK        = "MARK"
+      KW_MODIFIED    = "MODIFIED"
+      KW_TEXT        = "TEXT"
+      KW_WINDOW      = "WINDOW"
+      KW_SOUND       = "SOUND"
+      KW_RECORD      = "RECORD"
+      KW_STATEMENT   = "STATEMENT"
+      KW_SET         = "SET"
+      KW_SAME        = "SAME"
+      KW_TRUE        = "TRUE"
+      KW_FALSE       = "FALSE"
+      KW_UPPER       = "UPPER"
+      KW_LOWER       = "LOWER"
+      KW_CASE        = "CASE"
+      KW_INDEX       = "INDEX"
+      KW_FULL        = "FULL"
+      KW_LENGTH      = "LENGTH"
+      KW_FRAMED      = "FRAMED"
+      KW_INCDIC      = "INCDIC"
+      KW_CONTROL     = "CONTROL"
+      KW_SETTIME     = "SETTIME"
+      KW_ONCE        = "ONCE"
+      CARET          = "^"
+      PERCENT        = "%"
+      SUBST_PARAM    = "SUBST_PARAM"
+      SEMICOLON      = ";"
+
+      // System variables
+      SV_DATX = "DATX"
+      SV_USER = "USER"
+
+      // Application-related system variables
+      SV_APPLIC_ID       = "*APPLIC-ID"
+      SV_APPLIC_NAME     = "*APPLIC-NAME"
+      SV_COM             = "*COM"
+      SV_CONVID          = "*CONVID"
+      SV_COUNTER         = "*COUNTER"
+      SV_CPU_TIME        = "*CPU-TIME"
+      SV_CURRENT_UNIT    = "*CURRENT-UNIT"
+      SV_DATA            = "*DATA"
+      SV_ERROR_LINE      = "*ERROR-LINE"
+      SV_ERROR_NR        = "*ERROR-NR"
+      SV_ERROR_TA        = "*ERROR-TA"
+      SV_ETID            = "*ETID"
+      SV_ISN             = "*ISN"
+      SV_LBOUND          = "*LBOUND"
+      SV_LENGTH          = "*LENGTH"
+      SV_LEVEL           = "*LEVEL"
+      SV_LIBRARY_ID      = "*LIBRARY-ID"
+      SV_LINE            = "*LINE"
+      SV_LINEX           = "*LINEX"
+      SV_LOAD_LIBRARY_ID = "*LOAD-LIBRARY-ID"
+      SV_NUMBER          = "*NUMBER"
+      SV_OCCURRENCE      = "*OCCURRENCE"
+      SV_PAGE_EVENT      = "*PAGE-EVENT"
+      SV_PAGE_LEVEL      = "*PAGE-LEVEL"
+      SV_PROGRAM         = "*PROGRAM"
+      SV_REINPUT_TYPE    = "*REINPUT-TYPE"
+      SV_ROWCOUNT        = "*ROWCOUNT"
+      SV_STARTUP         = "*STARTUP"
+      SV_STEPLIB         = "*STEPLIB"
+      SV_SUBROUTINE      = "*SUBROUTINE"
+      SV_THIS_OBJECT     = "*THIS-OBJECT"
+      SV_TYPE            = "*TYPE"
+      SV_UBOUND          = "*UBOUND"
+
+      // Date/Time system variables
+      SV_DATD   = "*DATD"
+      SV_DAT4D  = "*DAT4D"
+      SV_DATE   = "*DATE"
+      SV_DAT4E  = "*DAT4E"
+      SV_DATG   = "*DATG"
+      SV_DATI   = "*DATI"
+      SV_DAT4I  = "*DAT4I"
+      SV_DATJ   = "*DATJ"
+      SV_DAT4J  = "*DAT4J"
+      SV_DATN   = "*DATN"
+      SV_DATU   = "*DATU"
+      SV_DAT4U  = "*DAT4U"
+      SV_DATV   = "*DATV"
+      SV_DATVS  = "*DATVS"
+      SV_TIMD   = "*TIMD"
+      SV_TIME   = "*TIME"
+      SV_TIME_OUT  = "*TIME-OUT"
+      SV_TIMESTMP  = "*TIMESTMP"
+      SV_TIMN   = "*TIMN"
+      SV_TIMX   = "*TIMX"
+
+      // Input/Output system variables
+      SV_CURS_COL   = "*CURS-COL"
+      SV_CURS_FIELD = "*CURS-FIELD"
+      SV_CURS_LINE  = "*CURS-LINE"
+      SV_CURSOR     = "*CURSOR"
+      SV_LINE_COUNT = "*LINE-COUNT"
+      SV_LINESIZE   = "*LINESIZE"
+      SV_LOG_LS     = "*LOG-LS"
+      SV_LOG_PS     = "*LOG-PS"
+      SV_PAGE_NUMBER = "*PAGE-NUMBER"
+      SV_PAGESIZE   = "*PAGESIZE"
+      SV_PF_KEY     = "*PF-KEY"
+      SV_PF_NAME    = "*PF-NAME"
+      SV_WINDOW_LS  = "*WINDOW-LS"
+      SV_WINDOW_POS = "*WINDOW-POS"
+      SV_WINDOW_PS  = "*WINDOW-PS"
+
+      // Natural environment system variables
+      SV_BROWSER_IO  = "*BROWSER-IO"
+      SV_DEVICE      = "*DEVICE"
+      SV_GROUP       = "*GROUP"
+      SV_HARDCOPY    = "*HARDCOPY"
+      SV_INIT_USER   = "*INIT-USER"
+      SV_LANGUAGE    = "*LANGUAGE"
+      SV_NATVERS     = "*NATVERS"
+      SV_NET_USER    = "*NET-USER"
+      SV_PARM_USER   = "*PARM-USER"
+      SV_PATCH_LEVEL = "*PATCH-LEVEL"
+      SV_PID         = "*PID"
+      SV_SCREEN_IO   = "*SCREEN-IO"
+      SV_SERVER_TYPE = "*SERVER-TYPE"
+      SV_UI          = "*UI"
+      SV_USER_NAME   = "*USER-NAME"
+
+      // System environment system variables
+      SV_CODEPAGE      = "*CODEPAGE"
+      SV_HARDWARE      = "*HARDWARE"
+      SV_HOSTNAME      = "*HOSTNAME"
+      SV_INIT_ID       = "*INIT-ID"
+      SV_INIT_PROGRAM  = "*INIT-PROGRAM"
+      SV_LOCALE        = "*LOCALE"
+      SV_MACHINE_CLASS = "*MACHINE-CLASS"
+      SV_OPSYS         = "*OPSYS"
+      SV_OS            = "*OS"
+      SV_OSVERS        = "*OSVERS"
+      SV_TP            = "*TP"
+      SV_TPSYS         = "*TPSYS"
+      SV_TPVERS        = "*TPVERS"
+      SV_WINMGR        = "*WINMGR"
+      SV_WINMGRVERS    = "*WINMGRVERS"
+
+      // XML system variables
+      SV_PARSE_COL           = "*PARSE-COL"
+      SV_PARSE_LEVEL         = "*PARSE-LEVEL"
+      SV_PARSE_NAMESPACE_URI = "*PARSE-NAMESPACE-URI"
+      SV_PARSE_ROW           = "*PARSE-ROW"
+      SV_PARSE_TYPE          = "*PARSE-TYPE"
+
+      // Operators
+      KW_AND = "AND"
+      KW_OR = "OR"
+      KW_NOT = "NOT"
+      KW_EQUALS = "EQUALS"
+      KW_EQUAL = "EQUAL"
+      KW_LESS = "LESS"
+      KW_GREATER = "GREATER"
+      KW_THAN = "THAN"
+
+      ASSIGN_OP = ":="
+      LE_OP = "<="
+      GE_OP = ">="
+      LT_OP = "<"
+      GT_OP = ">"
+      EQ_OP = "="
+      NEQ_OP = "^="
+
+      DOUBLE_STAR = "**"
+      PLUS = "+"
+      MINUS = "-"
+      STAR = "*"
+      SLASH = "SLASH"
+
+      // Punctuation
+      COLON = ":"
+      DOT = "."
+      COMMA = ","
+
+      LPAREN = "("
+      RPAREN = ")"
+      LBRACKET = "["
+      RBRACKET = "]"
+
+      // Data types
+      DT_ALPHANUMERIC = "DT_ALPHANUMERIC"
+      DT_BINARY = "DT_BINARY"
+      DT_CV = "DT_CV"
+      DT_DATE = "DT_DATE"
+      DT_FLOAT = "DT_FLOAT"
+      DT_INT = "DT_INT"
+      DT_LOG = "DT_LOG"
+      DT_NUMBER = "DT_NUMBER"
+      DT_OBJECT = "DT_OBJECT"
+      DT_PACK = "DT_PACK"
+      DT_TIME = "DT_TIME"
+      DT_UNICODE = "DT_UNICODE"
+
+      // Session parameters
+      SP_AD = "AD"
+      SP_AL = "AL"
+      SP_CD = "CD"
+      SP_DF = "DF"
+      SP_DL = "DL"
+      SP_EM = "EM"
+      SP_ES = "ES"
+      SP_FC = "FC"
+      SP_FL = "FL"
+      SP_GC = "GC"
+      SP_HC = "HC"
+      SP_HW = "HW"
+      SP_IC = "IC"
+      SP_ICU = "ICU"
+      SP_IP = "IP"
+      SP_IS = "IS"
+      SP_KD = "KD"
+      SP_LC = "LC"
+      SP_LCU = "LCU"
+      SP_LS = "LS"
+      SP_MC = "MC"
+      SP_MP = "MP"
+      SP_MS = "MS"
+      SP_NL = "NL"
+      SP_PC = "PC"
+      SP_PM = "PM"
+      SP_PS = "PS"
+      SP_SF = "SF"
+      SP_SG = "SG"
+      SP_TC = "TC"
+      SP_TCU = "TCU"
+      SP_UC = "UC"
+      SP_ZP = "ZP"
+      SP_DY = "DY"
+    ]
+}
+
+naturalFile ::= optionsStatement* defineDataPhase? normalCodeLine_* KW_END?
+
+
+// ====================================================================================
+// DEFINE DATA
+// ====================================================================================
+
+defineDataPhase ::= KW_DEFINE_DATA dataAreaBlock* KW_END_DEFINE {
+  pin=1
+  methods=[getNameIdentifier]
+}
+
+dataAreaBlock ::= scopeKeyword (KW_USING identifier | variableDecl*) {
+  pin=1
+}
+
+private scopeKeyword ::= KW_LOCAL | KW_GLOBAL | KW_PARAMETER | KW_INDEPENDENT | KW_CONTEXT
+
+variableDecl ::= (LEVEL_NUMBER | NUMBER) (KW_REDEFINE variableName | variableName dataTypeOrViewSpec? variableModifier*) {
+  pin=1
+  mixin="com.appweb.natural.intellij.psi.NaturalVariableDeclMixin"
+  implements="com.appweb.natural.intellij.psi.references.SimpleNamedElement"
+}
+
+// SLASH NUMBER (MINUS NUMBER)? handles date-embedded variable names like ANTALL-ETTER-28/2-94
+private variableName ::= USER_VARIABLE | SUBST_PARAM | IDENTIFIER (DOT IDENTIFIER | SLASH (IDENTIFIER | NUMBER (MINUS NUMBER)?))*
+
+private dataTypeOrViewSpec ::= dataTypeSpec | viewSpec | shorthandType
+// Shorthand type: "3X" or "10A" — number followed by a single type letter (no parens)
+private shorthandType ::= NUMBER IDENTIFIER
+private dataTypeSpec ::= LPAREN dataType (DOT NUMBER)? (SLASH arrayDimInType (COMMA arrayDimInType)*)? RPAREN
+// Array bounds allow arithmetic: BETA-TAB-MAKS + 1, T-MAKS + 2
+private arrayBound ::= MINUS? (NUMBER | IDENTIFIER | STAR) ((PLUS | MINUS) NUMBER)?
+private arrayDimInType ::= arrayBound (COLON arrayBound)?
+private viewSpec ::= (KW_VIEW KW_OF? IDENTIFIER)
+
+dataType ::=
+    DT_ALPHANUMERIC
+  | DT_BINARY
+  | DT_CV
+  | DT_DATE
+  | DT_FLOAT
+  | DT_INT
+  | DT_LOG
+  | DT_NUMBER
+  | DT_OBJECT
+  | DT_PACK
+  | DT_TIME
+  | DT_UNICODE
+
+variableModifier ::=
+    KW_DYNAMIC
+  | KW_CONST initValueGroup?
+  | (KW_INIT | KW_INITIAL) initLengthSpec? KW_ALL?
+  | initValueGroup
+  | initIndexedValue
+  | KW_REDEFINE
+  | KW_HANDLE_OF
+  | KW_BY KW_VALUE? KW_RESULT?
+  | KW_OPTIONAL
+  | defineDataEditMask
+  | arraySpec
+
+// INIT length specifier: FULL [LENGTH [n]], or LENGTH [n]
+// Covers: INIT <x>, INIT FULL <x>, INIT FULL LENGTH <x>, INIT LENGTH 17 <x>
+private initLengthSpec ::= KW_FULL KW_LENGTH? NUMBER? | KW_LENGTH NUMBER?
+
+// Init value group: <val [, val ...]> — extracted to its own rule so Grammar-Kit
+// can compute FIRST({LT_OP}) correctly even when preceded by optional KW_ALL.
+// initValue is optional per slot to handle empty placeholders: <'a', , 'b'>
+private initValueGroup ::= "<" initValue? ("," initValue?)* ">"
+
+// Array-element initialiser: (index [: index][, index]*) <value>  e.g.  (1) <'foo'>  or  (1:1,V) <'bar'>
+// Uses initValueGroup to support multiple and empty values: (1:1,V) <'50', ,'51','52'>
+private initIndexedValue ::= LPAREN initIndexSpec (COMMA initIndexSpec)* RPAREN initValueGroup
+private initIndexSpec ::= (NUMBER | IDENTIFIER | STAR) (COLON (NUMBER | IDENTIFIER | STAR))?
+// An initialiser value: either a session-parameter block (AD=P) or a regular expression
+private initValue ::= writeParenBlock | expression
+
+// Edit-mask or session-parameter modifier after data type: (EM=ZZZ,ZZ9.99)  (AD=P)
+private defineDataEditMask ::= LPAREN (sessionParameter | IDENTIFIER) EQ_OP editMaskValue RPAREN
+
+arraySpec ::= "(" arrayDimension ("," arrayDimension)* ")"
+
+arrayDimension ::= expression (":" (expression | STAR))?
+
+
+// ====================================================================================
+// NORMAL CODE
+// ====================================================================================
+
+
+// A loop label: any word (including keywords used as labels) followed by a DOT.
+// e.g. AVT. FIND ...  or  FIND. FIND ...  or  READ. READ ...
+private blockLabel ::= (IDENTIFIER | keywordAsVarPrefix | KW_FIND | KW_READ | KW_REPEAT | KW_FOR | KW_PERFORM | KW_GET | KW_SORT | KW_STORE | KW_HISTOGRAM | KW_GT | KW_LT | KW_GE | KW_LE | KW_EQ | KW_NE) DOT
+
+private normalCodeLine_ ::= statement | LINE_COMMENT
+
+statement ::=
+    decideForBlock
+  | decideOnBlock
+  | ifNoRecordsFoundClause
+  | ifBlock
+  | forBlock
+  | repeatBlock
+  | defineSubroutineBlock
+  | readBlock
+  | readWorkBlock
+  | findStatement
+  | findBlock
+  | sortBlock
+  | atBreakBlock
+  | atTopPageBlock
+  | atEndOfPageBlock
+  | atEndOfDataBlock
+  | atStartOfDataBlock
+  | onErrorBlock
+  | callnatStatement
+  | writeStatement
+  | setTimeStatement
+  | assignmentStatement
+  | simpleStatements
+
+//—— DECIDE FOR ——————————————————————————————————————————————————————————————————————
+// DECIDE FOR {FIRST|EVERY} CONDITION
+//   WHEN logical-condition statement ...
+//   [WHEN ANY statement ...]
+//   [WHEN ALL statement ...]
+//   WHEN NONE statement ...
+// END-DECIDE
+decideForBlock ::= KW_DECIDE KW_FOR (KW_FIRST | KW_EVERY) KW_CONDITION
+                   whenForClause+
+                   whenAnyClause?
+                   whenAllClause?
+                   whenNoneClause
+                   KW_END_DECIDE {
+  pin=2
+}
+
+whenForClause  ::= KW_WHEN condition statement* { pin=2 }
+whenAnyClause  ::= KW_WHEN KW_ANY statement*    { pin=2 }
+whenAllClause  ::= KW_WHEN KW_ALL statement*    { pin=2 }
+whenNoneClause ::= KW_WHEN KW_NONE statement*   { pin=2 }
+
+//—— DECIDE ON ————————————————————————————————————————————————————————————————————
+// DECIDE ON [FIRST|EVERY] [VALUE] [OF] operand
+//   VALUE op [: op] [, op [: op]]... statement ...
+//   [ANY [VALUE] statement ...]
+//   [ALL [VALUE] statement ...]
+//   NONE [VALUE] statement ...
+// END-DECIDE
+decideOnBlock ::= KW_DECIDE KW_ON (KW_FIRST | KW_EVERY)? (KW_VALUE | KW_VALUES)? KW_OF? expression
+                  decideOnValueClause+
+                  decideOnAnyClause?
+                  decideOnAllClause?
+                  decideOnNoneClause
+                  KW_END_DECIDE {
+  pin=2
+}
+
+decideOnValueClause ::= (KW_VALUE | KW_VALUES) decideOnValueItem (COMMA decideOnValueItem)* statement* { pin=1 }
+private decideOnValueItem ::= expression (COLON expression)?
+
+decideOnAnyClause  ::= KW_ANY  (KW_VALUE | KW_VALUES)? statement* { pin=1 }
+decideOnAllClause  ::= KW_ALL  (KW_VALUE | KW_VALUES)? statement* { pin=1 }
+decideOnNoneClause ::= KW_NONE (KW_VALUE | KW_VALUES)? statement* { pin=1 }
+
+private writeStatement ::= ((KW_WRITE !KW_WORK) | KW_DISPLAY | KW_PRINT) writeArg* {
+  pin=1
+}
+
+// LHS can also be a system variable: *ERROR := -1
+assignmentStatement ::= (systemVarRef | variableRef) ASSIGN_OP (assignmentStatement | sessionParameterSpec | expression) {
+  pin=2
+}
+
+// A parenthesised argument block in WRITE/INPUT/DISPLAY/PRINT.
+// In Natural map files the entire statement body — session-parameter assignments
+// (AD=D, CV=CV-BILDE) AND display-field specs (001T 'text', 002U field) — may
+// appear together inside one pair of parentheses.
+// pin=1 after LPAREN so that once we enter the block we don't fall back and try
+// to re-parse it as a subscript or condition.
+private writeParenBlock ::= LPAREN writeParenItem* RPAREN { pin=1 }
+private writeParenItem  ::= !RPAREN (writeParenParam | NEQ_OP | EQ_OP | LT_OP | GT_OP | GE_OP | LE_OP | expression)
+// Session-parameter assignment: IDENTIFIER (or SP_* token) = value
+private writeParenParam ::= (sessionParameter | IDENTIFIER) EQ_OP editMaskValue
+
+// KW_FROM: allows REQUEST DOCUMENT FROM ...; KW_WITH: allows WITH clause in REQUEST DOCUMENT
+// Uses writeAddExpr (not expression) so that SLASH is never treated as division here —
+// in WRITE/DISPLAY/PRINT context SLASH is always a newline separator, not a division operator.
+// !statement prevents consuming the next statement's first token as a write argument, but
+// assignmentStatement (pin=2) can cause !statement to return false in _NOT_ mode. The
+// !(IDENTIFIER ASSIGN_OP) / !(USER_VARIABLE ASSIGN_OP) guards provide a reliable fallback.
+// KW_VALUE: REQUEST DOCUMENT header args use "NAME 'x' VALUE 'y'" pairs.
+// KW_ENCODED: REQUEST DOCUMENT body ENCODED IN CODEPAGE "UTF-8"
+private writeArg ::= !statement !(IDENTIFIER ASSIGN_OP) !(USER_VARIABLE ASSIGN_OP) (writeParenBlock | SLASH | KW_USING | KW_MAP | KW_NO | KW_WINDOW | KW_AS | KW_FROM | KW_WITH | KW_VALUE | KW_ENCODED | writeAddExpr)
+
+
+//—— IF BLOCK ——————————————————————————————————————————————————————————————————————
+ifBlock ::= KW_IF condition KW_THEN? statement* (KW_ELSE statement*)? KW_END_IF {
+  pin=1
+}
+
+
+//—— FOR BLOCK —————————————————————————————————————————————————————————————————————
+forBlock ::= blockLabel? KW_FOR variableName (EQ_OP | ASSIGN_OP | KW_FROM)? expression KW_TO? expression (KW_STEP expression | KW_MAX expression | forStepArg)? statement* (KW_END_FOR | KW_END_ALL)? {
+  pin=2
+}
+
+// Positional step arg (no STEP keyword): e.g. FOR I 1 MAXANT-SEKTORER 3
+// Restricted to simple literals/sign+number — NOT full expression — so that a
+// following assignment like "RSX(K) := ..." doesn't get consumed as the step arg.
+private forStepArg ::= MINUS? NUMBER | PLUS NUMBER
+
+
+//—— REPEAT BLOCK —————————————————————————————————————————————————————————————————
+// Syntax 1: REPEAT statement* [UNTIL|WHILE condition] END-REPEAT  (post-condition)
+// Syntax 2: REPEAT [UNTIL|WHILE condition] statement* END-REPEAT  (pre-condition)
+// No condition = infinite loop (requires ESCAPE/STOP/TERMINATE to exit)
+repeatBlock ::= blockLabel? KW_REPEAT repeatCondition? statement* repeatCondition? (KW_END_REPEAT | KW_END_ALL)? {
+  pin=2
+}
+
+repeatCondition ::= (KW_UNTIL | KW_WHILE) condition {
+  pin=1
+}
+
+
+//—— DEFINE SUBROUTINE BLOCK ——————————————————————————————————————————————————————
+// DEFINE [SUBROUTINE] subroutine-name statement* END-SUBROUTINE
+defineSubroutineBlock ::= KW_DEFINE KW_SUBROUTINE? subroutineName statement* KW_END_SUBROUTINE {
+  pin=1
+}
+
+subroutineName ::= (USER_VARIABLE | IDENTIFIER | keywordAsVarPrefix
+  | KW_WRITE | KW_PRINT | KW_STOP | KW_SORT | KW_FIND | KW_GET | KW_INPUT | KW_FETCH | KW_CALL | KW_PERFORM | KW_DECIDE
+  | KW_MARK | KW_RELEASE | KW_STACK | KW_EXAMINE | KW_SEPARATE | KW_TRANSLATE | KW_COMPRESS | KW_REDUCE
+  | KW_EXPAND | KW_CONTROL | KW_IGNORE | KW_ESCAPE | KW_ADD | KW_SUBTRACT | KW_MULTIPLY | KW_DIVIDE
+  | KW_COMPUTE | KW_ASSIGN | KW_DELETE | KW_END | KW_LOOP | KW_IF | KW_THEN | KW_ELSE | KW_AND | KW_OR
+  | KW_NOT | KW_WHEN | KW_FOR | KW_REPEAT | KW_CALLNAT | KW_INCLUDE | KW_NEWPAGE | KW_SKIP | KW_INPUT
+  | KW_READ | KW_UPDATE | KW_STORE | KW_DISPLAY | KW_HISTOGRAM | KW_RESET | KW_MOVE | KW_EJECT) {
+  mixin="com.appweb.natural.intellij.psi.NaturalSubroutineNameMixin"
+  implements="com.appweb.natural.intellij.psi.references.SimpleNamedElement"
+}
+
+subroutineRef ::= (USER_VARIABLE | IDENTIFIER | KW_PRINT | KW_WRITE | KW_DISPLAY | KW_INPUT | KW_REINPUT | KW_FORMAT | KW_STOP | KW_GET | KW_FIND | KW_SORT | KW_READ | KW_ADD | KW_MOVE | KW_RESET | KW_ESCAPE | KW_IF | KW_FOR | KW_REPEAT | KW_FETCH | KW_CALL | KW_EXAMINE | KW_COMPRESS | KW_DELETE | KW_STORE | KW_UPDATE | KW_CLOSE | KW_RELEASE | KW_INCLUDE | KW_HISTOGRAM | KW_SELECT) {
+  mixin="com.appweb.natural.intellij.psi.NaturalSubroutineRefMixin"
+}
+
+
+//—— READ BLOCK ————————————————————————————————————————————————————————————————————
+readBlock ::= blockLabel? ((KW_READ !KW_WORK) | KW_BROWSE) (KW_ALL | LPAREN expression RPAREN)? multiFetchClause? KW_RECORDS? KW_IN? KW_FILE? identifier
+              passwordClause? cipherClause? (KW_WITH KW_REPOSITION)? rangeSpecifications?
+              startingWithIsn? inSharedHold? skipRecordsInHold? whereClause?
+              statement+ (KW_END_READ | KW_END_ALL)? {
+  pin=2
+}
+
+passwordClause ::= KW_PASSWORD EQ_OP expression {pin=1}
+cipherClause ::= KW_CIPHER EQ_OP expression {pin=1}
+multiFetchClause ::= KW_MULTI_FETCH (KW_ON | KW_OFF | KW_OF? expression) {pin=1}
+
+startingWithIsn ::= KW_STARTING KW_WITH KW_ISN EQ_OP expression
+inSharedHold ::= KW_IN? KW_SHARED KW_HOLD (KW_MODE EQ_OP expression)?
+skipRecordsInHold ::= KW_SKIP KW_RECORDS? KW_IN KW_HOLD
+
+// Sequence/range — try most specific first
+rangeSpecifications ::= rangeSpecOption2 | rangeSpecOption3 | rangeSpecOption1
+
+// Option 1: [IN] [PHYSICAL] [ASC/DESC/VARIABLE/DYNAMIC] [SEQUENCE]
+rangeSpecOption1 ::= KW_IN? KW_PHYSICAL? sequenceDirection
+
+// Option 2: {BY|WITH} ISN [{= | EQ | EQUAL TO | [STARTING] FROM} op6 [[THRU|ENDING AT] op7]]
+// The equality-value clause is optional: READ X BY ISN (no filter) is valid.
+rangeSpecOption2 ::= (KW_BY | KW_WITH) KW_ISN (equalOrStartingFromClause expression (thruOrEndingAt expression)?)? {
+  pin=2
+}
+
+// Option 3: [IN] [LOGICAL] [seq-direction] {BY|WITH} descriptor [sub-option]
+rangeSpecOption3 ::= KW_IN? KW_LOGICAL? sequenceDirection (KW_BY | KW_WITH) descriptor (rangeSpecOption3c | rangeSpecOption3b | rangeSpecOption3a | rangeSpecOption3d | rangeSpecOption3e)?
+// Bare upper bound: BY descriptor ENDING AT value  (no equality clause)
+private rangeSpecOption3e ::= thruOrEndingAt expression
+
+// {= | EQ | EQUAL TO | [STARTING] FROM} op6 [[THRU|ENDING AT] op7]
+rangeSpecOption3a ::= equalOrStartingFromClause expression (thruOrEndingAt expression)?
+// {= | EQ | EQUAL TO | [STARTING] FROM} op6 TO op7
+rangeSpecOption3b ::= equalOrStartingFromClause expression KW_TO expression
+// {< | LT | LESS THAN | > | GT | GREATER THAN | <= | LE | LESS EQUAL | >= | GE | GREATER EQUAL} op6
+rangeSpecOption3c ::= lessEqualOrGreaterClause expression
+// Implicit from-thru range: BY descriptor value1 THRU value2.
+// Requires THRU to prevent consuming the next statement's variable as a range bound.
+private rangeSpecOption3d ::= descriptor thruOrEndingAt expression
+
+private thruOrEndingAt ::= KW_THRU | KW_ENDING KW_AT
+
+sequenceDirection ::= (KW_ASCENDING | KW_DESCENDING | KW_VARIABLE stringOrIdentifier | KW_DYNAMIC stringOrIdentifier)? KW_SEQUENCE?
+
+whereClause ::= KW_WHERE condition
+
+lessEqualOrGreaterClause ::= LT_OP | KW_LESS KW_THAN | GT_OP | KW_GREATER KW_THAN | LE_OP | KW_LESS KW_EQUAL | GE_OP | KW_GREATER KW_EQUAL
+equalOrStartingFromClause ::= EQ_OP | KW_EQUAL KW_TO? | KW_STARTING KW_FROM | KW_FROM
+
+//—— FIND BLOCK ————————————————————————————————————————————————————————————————————
+// Syntax 1: with processing loop (END-FIND)
+findBlock ::= blockLabel? KW_FIND findModeClause
+              multiFetchClause? KW_RECORDS? KW_IN? KW_FILE? identifier
+              passwordClause? cipherClause?
+              KW_WITH? (KW_LIMIT LPAREN expression RPAREN)? findCriteria?
+              coupledClause*
+              startingWithIsn?
+              sortedByClause?
+              retainClause?
+              inSharedHold? skipRecordsInHold?
+              whereClause?
+              statement* (KW_END_FIND | KW_END_ALL)? {
+  pin=2
+}
+
+// Syntax 2: no processing loop — FIND FIRST | NUMBER | UNIQUE
+findStatement ::= blockLabel? KW_FIND (KW_FIRST | KW_NUMBER | KW_UNIQUE)
+                  KW_RECORDS? KW_IN? KW_FILE? identifier
+                  passwordClause? cipherClause?
+                  KW_WITH? (KW_LIMIT LPAREN expression RPAREN)? findCriteria?
+                  coupledClause*
+                  sortedByClause?
+                  retainClause?
+                  whereClause? {
+  pin=3
+}
+
+// Loop mode: [ALL | (count)]; No-loop mode: FIRST | NUMBER | UNIQUE
+private findModeClause ::= (KW_FIRST | KW_NUMBER | KW_UNIQUE) | (KW_ALL | LPAREN expression RPAREN)?
+
+// Multiple criteria joined by AND
+findCriteria ::= findCriterion ((KW_AND | KW_OR) findCriterion)*
+
+// Single criterion: descriptor [(i)] [comparator value [OR comparator? value]*] [THRU value [BUT NOT value [THRU value]]]
+// In OR shorthand repetition (FIELD = 'A' OR = 'B'), the comparator must be present to
+// distinguish from a new criterion (FIELD1 = 'A' OR FIELD2 = 'B' parsed at findCriteria level).
+findCriterion ::= descriptor subscript? (findComparator? expression (KW_OR findComparator expression)*)?
+                  (KW_THRU expression (KW_BUT KW_NOT expression (KW_THRU expression)?)?)?
+
+findComparator ::= EQ_OP | NEQ_OP | LT_OP | GT_OP | LE_OP | GE_OP
+                 | KW_EQUAL KW_TO?
+                 | KW_LESS KW_THAN | KW_LESS KW_EQUAL
+                 | KW_GREATER KW_THAN | KW_GREATER KW_EQUAL
+                 | KW_NOT (EQ_OP | KW_EQUAL | LT_OP | GT_OP | LE_OP | GE_OP)
+
+// [AND|OR] COUPLED [TO] [FILE] view-name [VIA desc1 [= | EQUAL [TO]] desc2] [WITH] criteria
+coupledClause ::= (KW_AND | KW_OR)? KW_COUPLED KW_TO? KW_FILE? identifier
+                  (KW_VIA descriptor (EQ_OP | KW_EQUAL KW_TO?)? descriptor)?
+                  KW_WITH? findCriteria? {pin=2}
+
+// SORTED [BY] descriptor [DESCENDING] ...  (max 3 descriptors)
+// Use !statement guard to prevent greedily consuming the next statement as a sort key.
+// Use expression (not descriptor) so Grammar-Kit's FIRST set computation stays complex
+// enough to omit the nextTokenIs optimization that would incorrectly reject IDENTIFIER tokens.
+private sortKeyItem ::= !statement expression KW_DESCENDING?
+sortedByClause ::= KW_SORTED KW_BY? sortKeyItem+ {pin=1}
+
+// RETAIN AS set-name
+retainClause ::= KW_RETAIN KW_AS expression {pin=1}
+
+// IF NO [RECORDS] [FOUND] [ENTER | statement*] END-NOREC
+ifNoRecordsFoundClause ::= KW_IF KW_NO (KW_RECORDS | KW_RECORD)? KW_FOUND? (KW_ENTER | statement*) KW_END_NOREC {pin=2}
+
+//—— SORT BLOCK ————————————————————————————————————————————————————————————————————————
+// [AND] SORT THEM [BY] key [ASC|DESC] ... [RECORDS]
+// [USING operand2... | USING KEYS]
+// [GIVE function [OF] (operand3...) [(NL=nn.m)] ...]
+// statement*
+// END-SORT
+sortBlock ::= blockLabel? KW_AND? KW_SORT (KW_THEM | KW_RECORDS)? KW_BY?
+              sortKey+
+              KW_RECORDS?
+              sortUsingClause?
+              sortGiveClause?
+              statement*
+              (KW_END_SORT | KW_END_ALL)? {
+  pin=3
+}
+
+sortKey ::= expression (KW_ASCENDING | KW_DESCENDING)?
+
+sortUsingClause ::= KW_USING (KW_KEYS | sortUsingArg+) { pin=1 }
+private sortUsingArg ::= !statement expression
+
+sortGiveClause ::= KW_GIVE sortGiveItem+ { pin=1 }
+
+sortGiveItem ::= sortAggregateFunction KW_OF? LPAREN expression+ RPAREN
+                 (LPAREN SP_NL EQ_OP NUMBER RPAREN)? { pin=1 }
+
+private sortAggregateFunction ::= KW_MAX | KW_MIN | KW_NMIN | KW_COUNT | KW_NCOUNT
+                                 | KW_OLD | KW_AVER | KW_NAVER | KW_SUM | KW_TOTAL
+
+
+//—— ON ERROR ——————————————————————————————————————————————————————————————————————
+onErrorBlock ::= KW_ON_ERROR statement* KW_END_ERROR {
+  pin=1
+}
+
+//—— AT END OF DATA ————————————————————————————————————————————————————————————————
+atEndOfDataBlock ::= KW_AT? KW_END KW_OF? (KW_DATA | KW_FILE) statement* (KW_END_ENDDATA | KW_END_ENDFILE) {
+  pin=4
+}
+
+//—— AT BREAK OF ——————————————————————————————————————————————————————————————————
+// AT [BREAK] [OF] field-name [/n/] statement* END-BREAK
+// Use variableRef (not expression) for the field so that /n/ level indicators are not
+// consumed as division operators by mulExpr.
+atBreakBlock ::= KW_AT KW_BREAK KW_OF? variableRef (SLASH NUMBER SLASH)? statement* (KW_END_BREAK | KW_END_ALL)? {
+  pin=2
+}
+
+//—— AT TOP PAGE ———————————————————————————————————————————————————————————————————
+// AT TOP PAGE [(report-number)] statement* END-TOPPAGE
+atTopPageBlock ::= KW_AT? KW_TOP KW_OF? KW_PAGE (LPAREN NUMBER RPAREN)? statement* KW_END_TOPPAGE {
+  pin=4
+}
+
+//—— AT END OF PAGE ——————————————————————————————————————————————————————————————
+// AT END OF PAGE [(report-number)] statement* END-ENDPAGE
+atEndOfPageBlock ::= KW_AT? KW_END KW_OF? KW_PAGE (LPAREN (NUMBER | IDENTIFIER DOT?) RPAREN)? statement* KW_END_ENDPAGE {
+  pin=4
+}
+
+//—— AT START OF DATA ——————————————————————————————————————————————————————————————
+// [AT] START OF DATA [(n)] statement* END-START
+atStartOfDataBlock ::= KW_AT? KW_START KW_OF? KW_DATA statementRef? statement* KW_END_START {
+  pin=4
+}
+
+
+// ── Simple statements ─────────────────────────────────────────────────────────
+performStatement     ::= KW_PERFORM subroutineRef performParam* { pin=1 }
+private performParam ::= !statement expression
+callnatStatement     ::= KW_CALLNAT stringOrIdentifier (KW_USING? callnatParam+)? (KW_GIVING expression)? { pin=1 }
+// A callnat parameter stops before anything that looks like the start of a statement
+private callnatParam ::= !statement expression
+includeStatement     ::= KW_INCLUDE IDENTIFIER includeParam* { pin=1 }
+// Substitution values for &n& references; intentionally excludes bare IDENTIFIER to avoid
+// greedily consuming the first token of the next statement (e.g. LOGG.TEKST := ...)
+// MINUS handles Natural's line-continuation char between string params: INCLUDE X 'a' 'b' - \n 'c'
+private includeParam ::= STRING_LITERAL | USER_VARIABLE | SYSTEM_VARIABLE | NUMBER | MINUS
+// MOVE ALL 'x' TO field UNTIL n  — only variant that allows UNTIL clause
+// All other MOVE variants do NOT allow UNTIL (it belongs to the enclosing REPEAT post-condition)
+moveStatement        ::= KW_MOVE (moveAllBody | moveRegularBody) { pin=1 }
+private moveAllBody  ::= KW_ALL expression KW_TO moveTarget+ (KW_UNTIL expression)? { pin=1 }
+private moveRegularBody ::= moveModifier? (expression sessionParameterSpec? | sessionParameterSpec) KW_TO moveTarget+
+private moveModifier ::= KW_BY (KW_NAME | KW_POSITION) | KW_EDITED | KW_ROUNDED | (KW_LEFT | KW_RIGHT) KW_JUSTIFIED? | KW_NORMALIZED | KW_ENCODED
+private moveTarget   ::= !statement expression writeParenBlock?
+assignStatement      ::= KW_ASSIGN expression (ASSIGN_OP | EQ_OP) expression { pin=1 }
+computeStatement     ::= KW_COMPUTE KW_ROUNDED? expression (ASSIGN_OP | EQ_OP) expression { pin=1 }
+addStatement         ::= KW_ADD (!KW_TO !KW_GIVING !statement expression)+ (KW_TO expression)? (KW_GIVING expression)? { pin=1 }
+subtractStatement    ::= KW_SUBTRACT (!KW_FROM !KW_GIVING !statement expression)+ (KW_FROM expression)? (KW_GIVING expression)? { pin=1 }
+multiplyStatement    ::= KW_MULTIPLY expression KW_BY expression (KW_GIVING expression)? { pin=1 }
+divideStatement      ::= KW_DIVIDE KW_ROUNDED? expression KW_INTO? expression (KW_GIVING expression)? (KW_REMAINDER expression)? { pin=1 }
+compressStatement    ::= KW_COMPRESS KW_FULL? expression+ (KW_INTO | KW_TO) expression compressOption* { pin=1 }
+private compressOption ::= !statement (KW_WITH (KW_ALL KW_SPACES | KW_DELIMITER expression? | expression) | KW_LEAVING KW_NO KW_SPACE?)
+// EXAMINE [DIRECTION ...] [FULL] [SUBSTRING (var, start [, len])] target [FOR [FULL] [PATTERN] value]
+//   [examineOption...]
+// Covers variants like: EXAMINE FULL SUBSTRING(X,1,1) ' ' REPLACE '0'
+//                       EXAMINE FULL X FOR ' ' WITH DELIMITERS REPLACE '.'
+//                       EXAMINE X AND TRANSLATE INTO UPPER CASE
+examineStatement     ::= KW_EXAMINE (KW_DIRECTION (KW_BACKWARD | KW_FORWARD)?)? KW_FULL?
+                         examineTarget
+                         (KW_FROM expression)?
+                         examineBody? { pin=1 }
+private examineBody ::= KW_FOR KW_FULL? KW_PATTERN? expression examineOption*
+                      | KW_AND? KW_TRANSLATE KW_INTO (KW_UPPER | KW_LOWER) KW_CASE?
+                      | examineOption+
+                      | expression examineOption*   // implicit FOR-value: EXAMINE X ' ' REPLACE '0'
+// SUBSTRING ( var , start [, len] )  OR plain expression
+private examineTarget ::= KW_SUBSTRING LPAREN expression (COMMA expression)* RPAREN | expression
+// GIVING INDEX IN var1 var2 — two result variables allowed (row+col index for 2D arrays).
+// !statement !KW_INDEX guards prevent consuming the next statement's identifier or the INDEX examineOption keyword.
+private examineOption ::= KW_GIVING (KW_POSITION | KW_LENGTH | KW_INDEX | KW_NUMBER) KW_IN? (!statement !KW_INDEX expression)? (!statement !KW_INDEX expression)?
+                        | KW_GIVING identifier
+                        | KW_REPLACE KW_WITH? expression
+                        | KW_WITH (KW_DELIMITER | KW_DELIMITERS) expression?
+                        | KW_DELETE
+                        | KW_INDEX KW_IN? (!statement expression)?
+                        | KW_NUMBER KW_IN? (!statement expression)?
+                        | KW_POSITION KW_IN? (!statement expression)?
+                        | KW_LENGTH KW_IN? (!statement expression)?
+                        | KW_AND KW_TRANSLATE KW_INTO (KW_UPPER | KW_LOWER) IDENTIFIER?
+separateStatement    ::= KW_SEPARATE expression (KW_WITH? (KW_DELIMITER | KW_DELIMITERS) expression)? ((KW_LEFT | KW_RIGHT) KW_JUSTIFIED?)? KW_INTO expression+ (KW_WITH? (KW_DELIMITER | KW_DELIMITERS) expression)? (KW_REMAINDER expression)? (KW_IGNORE)? (KW_WITH? (KW_DELIMITER | KW_DELIMITERS) expression)? { pin=1 }
+translateStatement   ::= KW_TRANSLATE expression (KW_USING expression)? { pin=1 }
+resetStatement       ::= KW_RESET (KW_INITIAL)? resetArg+ { pin=1 }
+private resetArg     ::= !statement (sessionParameter | expression)
+writeStatement       ::= KW_WRITE writeArg* { pin=1 }
+displayStatement     ::= KW_DISPLAY writeArg* { pin=1 }
+printStatement       ::= KW_PRINT writeArg* { pin=1 }
+// Syntax 1: INPUT [WINDOW='name'] [NO ERASE] [(params)] [WITH TEXT] [MARK] [ALARM] field/text...
+// Syntax 2: INPUT [WINDOW='name'] [WITH TEXT] [MARK] [ALARM] [USING] MAP map-name [NO ERASE] [fields] [NO PARAMETER]
+inputStatement ::= KW_INPUT
+                   inputWindowClause?
+                   (KW_NO KW_ERASE)?
+                   writeGlobalParams?
+                   inputWithTextClause?
+                   inputMarkClause?
+                   inputAlarmClause?
+                   (inputUsingMapBody | inputArg*) {
+  pin=1
+}
+// Global session-parameter block at start of INPUT statement: (AD=D CV=field ...)
+private writeGlobalParams ::= writeParenBlock
+inputWindowClause   ::= KW_WINDOW EQ_OP STRING_LITERAL { pin=1 }
+inputWithTextClause ::= KW_WITH? KW_TEXT inputArg+ { pin=2 }
+// INPUT MARK [POSITION col IN field]  OR  INPUT MARK *field  (positional form)
+inputMarkClause     ::= KW_MARK (KW_POSITION expression KW_IN expression | inputArg) { pin=1 }
+inputAlarmClause    ::= KW_AND? KW_SOUND? KW_ALARM { pin=3 }
+private inputUsingMapBody ::= KW_USING? KW_MAP expression (KW_NO KW_ERASE)? inputArg* (KW_NO KW_PARAMETER)?
+private inputArg    ::= !statement (COMMA | writeParenBlock | SLASH | expression)
+reinputStatement     ::= KW_REINPUT KW_FULL? expression? writeParenBlock? reinputArg* (KW_WITH? KW_TEXT reinputArg+)? (KW_USING KW_HELP)? reinputMarkClause? KW_ALARM? { pin=1 }
+private reinputMarkClause ::= KW_MARK !statement (writeParenBlock | expression)+
+private reinputArg ::= !statement (COMMA | writeParenBlock | expression)
+stopStatement        ::= KW_STOP { pin=1 }
+retryStatement       ::= KW_RETRY { pin=1 }
+terminateStatement   ::= KW_TERMINATE (expression (expression)?)? { pin=1 }
+escapeStatement      ::= KW_ESCAPE (KW_BOTTOM | KW_TOP | KW_ROUTINE | KW_MODULE)? KW_IMMEDIATE? (LPAREN (blockLabel | NUMBER | IDENTIFIER) RPAREN | blockLabel)? { pin=1 }
+fetchStatement       ::= KW_FETCH (!statement !SLASH expression)* { pin=1 }
+// CALL [INTERFACE4] name [USING] arg*
+callStatement        ::= KW_CALL expression KW_USING? callArg* { pin=1 }
+private callArg      ::= !statement expression
+runStatement         ::= KW_RUN expression { pin=1 }
+// READ WORK FILE n [ONCE] [RECORD|VARIABLE|SELECT] target* statement* END-WORK?
+readWorkBlock          ::= blockLabel? KW_READ KW_WORK KW_FILE? expression? KW_ONCE? readWorkSelect? statement* KW_END_WORK? { pin=2 }
+private readWorkSelect ::= (KW_RECORD? KW_VARIABLE? | KW_SELECT) readWorkArg+
+// Additional !(X ASSIGN_OP) guards: !statement is unreliable for pin=2 rules (assignmentStatement).
+private readWorkArg    ::= !statement !(IDENTIFIER ASSIGN_OP) !(IDENTIFIER DOT IDENTIFIER ASSIGN_OP) !(USER_VARIABLE ASSIGN_OP) expression
+// Use writeArg (with !statement guard) to prevent greedy cross-line consumption of next statement
+writeWorkFileStatement ::= KW_WRITE KW_WORK KW_FILE? expression KW_VARIABLE? writeArg+ { pin=1 }
+downloadStatement      ::= KW_DOWNLOAD SP_PC? KW_FILE? expression* { pin=1 }
+closeWorkStatement     ::= KW_CLOSE KW_WORK? KW_FILE? expression { pin=1 }
+setTimeStatement       ::= blockLabel? KW_SETTIME { pin=2 }
+// END-TRANSACTION or END TRANSACTION (both forms exist in practice)
+// Accept multiple trailing args (e.g. *PROGRAM ET-DATA) via writeArg*
+endTransactionStatement ::= (KW_END_TRANSACTION | KW_END KW_TRANSACTION) writeArg* { pin=1 }
+backoutStatement     ::= KW_BACKOUT KW_TRANSACTION? { pin=1 }
+storeStatement       ::= blockLabel? KW_STORE KW_RECORD? KW_IN? KW_FILE? identifier
+                         passwordClause?
+                         cipherClause?
+                         storeNumberClause? { pin=2 }
+private storeNumberClause ::= (KW_USING | KW_GIVING) KW_NUMBER expression
+updateStatement      ::= KW_UPDATE KW_RECORD? KW_IN? KW_STATEMENT? statementRef? { pin=1 }
+deleteStatement      ::= KW_DELETE KW_RECORD? KW_IN? KW_STATEMENT? statementRef? { pin=1 }
+private statementRef ::= LPAREN (IDENTIFIER | KW_FIND | KW_READ | KW_REPEAT | KW_FOR | KW_PERFORM | KW_GET | KW_SORT | NUMBER) DOT? RPAREN
+rejectStatement      ::= KW_REJECT (KW_IF condition)? { pin=1 }
+// ACCEPT [IF] condition   — condition may be parenthesised
+acceptStatement      ::= KW_ACCEPT (KW_IF condition | condition)? { pin=1 }
+// SKIP [(rep)] n [LINES]  — blank output lines on report/window
+skipStatement        ::= KW_SKIP (LPAREN (NUMBER | IDENTIFIER | SUBST_PARAM) RPAREN)? writeArg* KW_LINES? { pin=1 }
+newpageStatement     ::= KW_NEWPAGE (LPAREN (NUMBER | IDENTIFIER | SUBST_PARAM) RPAREN | SUBST_PARAM)?
+                         (KW_IF? KW_LESS KW_THAN? expression KW_LINES? KW_LEFT?
+                         | IDENTIFIER KW_IF KW_TOP KW_OF? KW_PAGE
+                         | KW_WHEN KW_LESS KW_THAN? expression KW_LINES? KW_LEFT?)?
+                         writeArg* { pin=1 }
+optionsStatement     ::= KW_OPTIONS optionsArg+ { pin=1 }
+private optionsArg   ::= !statement (IDENTIFIER EQ_OP (IDENTIFIER | KW_ON | KW_OFF | NUMBER) | identifier)
+formatStatement      ::= KW_FORMAT (LPAREN (NUMBER | IDENTIFIER) RPAREN)? (sessionParameter EQ_OP sessionParamValue)+ { pin=1 }
+private sessionParamValue ::= KW_ON | KW_OFF | NEQ_OP | expression
+ignoreStatement      ::= KW_IGNORE { pin=1 }
+// EJECT [(n)] [IF LESS THAN n LINES LEFT]  — Natural page-eject conditional
+ejectStatement       ::= KW_EJECT (LPAREN (NUMBER | IDENTIFIER) RPAREN)?
+                         (KW_IF KW_LESS KW_THAN? expression KW_LINES? KW_LEFT?)?
+                         writeArg* { pin=1 }
+endAllStatement      ::= KW_END_ALL { pin=1 }
+defineWindowStatement    ::= KW_DEFINE_WINDOW writeArg* { pin=1 }
+definePrinterStatement   ::= KW_DEFINE_PRINTER writeArg* { pin=1 }
+defineWorkFileStatement  ::= KW_DEFINE_WORK_FILE writeArg* { pin=1 }
+markStatement            ::= KW_MARK writeArg* { pin=1 }
+stackStatement           ::= KW_STACK writeArg* { pin=1 }
+// SET KEY ALL | key-name ... — assign PF/control keys
+setKeyStatement          ::= KW_SET KW_KEY? (KW_ALL | setKeyArg+) { pin=1 }
+private setKeyArg        ::= !statement (writeParenBlock | SLASH | KW_USING | KW_MAP | KW_NO | KW_WINDOW | KW_AS | IDENTIFIER EQ_OP expression | expression)
+// RELEASE SET 'name'  — releases a SQL cursor set.  Also RELEASE STACK, RELEASE TRANSACTION, RELEASE var.
+releaseStatement       ::= KW_RELEASE (KW_SET expression? | KW_STACK | KW_TRANSACTION | IDENTIFIER | STRING_LITERAL)? { pin=1 }
+setControlStatement    ::= KW_SET KW_CONTROL writeArg* { pin=2 }
+controlStatement       ::= KW_CONTROL writeArg* { pin=1 }
+// GET SAME [(lbl|n)] — re-read current record from a labelled READ/FIND
+// GET [RECORD] IN FILE view ISN (...)?
+getStatement           ::= blockLabel? KW_GET (KW_SAME (LPAREN (blockLabel | NUMBER | IDENTIFIER) RPAREN)?
+                                              | KW_TRANSACTION? KW_DATA? KW_VARIABLE? KW_IN? KW_FILE? identifier (KW_ISN getArg? | getArg)?) { pin=2 }
+private getArg         ::= !statement expression
+expandStatement        ::= KW_EXPAND KW_ARRAY? expandBody? writeArg* { pin=1 }
+reduceStatement        ::= KW_REDUCE KW_ARRAY? expandBody? { pin=1 }
+resizeStatement        ::= KW_RESIZE KW_ARRAY? expandBody? { pin=1 }
+// HISTOGRAM [label.] view descriptor [range-clause] statement* END-HISTOGRAM
+// Uses an optional END-ALL / END-HISTOGRAM (grammar accepts END-ALL for flexibility).
+histogramStatement     ::= blockLabel? KW_HISTOGRAM (KW_ALL | LPAREN expression RPAREN)? KW_IN? identifier
+                           passwordClause? cipherClause?
+                           rangeSpecifications?
+                           whereClause?
+                           statement* (KW_END_HISTOGRAM | KW_END_ALL)? { pin=2 }
+// expandBody handles: [array-ref] TO (subscript)  OR  just  TO (subscript)
+// arraySpec used for size so that (1:1) is correctly parsed as array bounds not condition
+private expandBody ::= KW_TO arraySpec | !statement expression KW_TO arraySpec
+incdicStatement        ::= KW_INCDIC (IDENTIFIER | STRING_LITERAL)? { pin=1 }
+// PROCESS COMMAND — executes an OS/Natural command
+processCommandStatement ::= KW_PROCESS KW_COMMAND writeArg* { pin=2 }
+// REQUEST DOCUMENT — Natural HTTP/internet request
+requestDocumentStatement ::= KW_REQUEST KW_DOCUMENT writeArg* { pin=2 }
+
+simpleStatements ::=
+    moveStatement
+  | performStatement
+  | callnatStatement
+  | includeStatement
+  | assignStatement
+  | computeStatement
+  | addStatement
+  | subtractStatement
+  | multiplyStatement
+  | divideStatement
+  | compressStatement
+  | examineStatement
+  | separateStatement
+  | translateStatement
+  | resetStatement
+  | writeWorkFileStatement
+  | downloadStatement
+  | closeWorkStatement
+  | writeStatement
+  | displayStatement
+  | printStatement
+  | inputStatement
+  | reinputStatement
+  | stopStatement
+  | retryStatement
+  | terminateStatement
+  | escapeStatement
+  | fetchStatement
+  | callStatement
+  | runStatement
+  | endTransactionStatement
+  | backoutStatement
+  | storeStatement
+  | updateStatement
+  | deleteStatement
+  | rejectStatement
+  | acceptStatement
+  | skipStatement
+  | newpageStatement
+  | optionsStatement
+  | formatStatement
+  | ignoreStatement
+  | ejectStatement
+  | endAllStatement
+  | defineWindowStatement
+  | definePrinterStatement
+  | defineWorkFileStatement
+  | markStatement
+  | stackStatement
+  | releaseStatement
+  | setControlStatement
+  | setKeyStatement
+  | controlStatement
+  | getStatement
+  | expandStatement
+  | reduceStatement
+  | resizeStatement
+  | histogramStatement
+  | incdicStatement
+  | processCommandStatement
+  | requestDocumentStatement
+
+// ======================================================================
+// Expressions
+// ======================================================================
+
+condition ::= orCondition
+
+orCondition ::= andCondition (KW_OR (andCondition | compOpRhs))* {
+  pin(".*")=1
+}
+
+andCondition ::= notCondition (KW_AND (notCondition | compOpRhs))* {
+  pin(".*")=1
+}
+
+notCondition ::= KW_NOT breakCondition | KW_FIRST | KW_NOT? comparisonExpr | breakCondition
+breakCondition ::= KW_BREAK KW_OF? expression { pin=1 }
+
+// Named private rules (no pin) so they can safely rollback KW_NOT if the suffix doesn't match.
+// These must come AFTER compOp in the optional group so that NOT= etc. still work via compOp.
+private notModifiedCheck ::= KW_NOT KW_MODIFIED
+private notUniqueCheck   ::= KW_NOT KW_UNIQUE variableRef?
+
+comparisonExpr ::= addExpr ((compOp addExpr (KW_THRU addExpr)? (KW_BUT KW_NOT addExpr (KW_THRU addExpr)?)? | notModifiedCheck | notUniqueCheck) | KW_MODIFIED | KW_UNIQUE | KW_SPECIFIED | typeCheck)? {
+  pin(".*")=1
+}
+
+// Natural type-check condition: field IS (N2)  or  field IS (A10)
+// IS is lexed as SP_IS; the type name is IDENTIFIER (in NORMAL_CODE, N2 is not a data-type token)
+private typeCheck ::= SP_IS LPAREN (IDENTIFIER | NUMBER) (DOT NUMBER)? RPAREN
+
+// Shorthand right-hand side: reuses the left operand from the preceding comparison
+// e.g. IF A = '11' OR = '19' OR = '31'
+// The trailing (KW_AND ...)* handles cases like: IF A = 'X' OR = 'Y' AND B = 'Z'
+// where AND conditions follow a shorthand OR chain. No pin here so rollback is safe.
+private compOpRhs ::= compOp addExpr (KW_THRU addExpr)? (KW_BUT KW_NOT addExpr (KW_THRU addExpr)?)? (KW_AND (andCondition | compOpRhs))*
+
+compOp ::= LE_OP | KW_EQUALS (KW_TO)? | KW_LESS KW_THAN | KW_GREATER KW_THAN
+  | EQ_OP | NEQ_OP | LT_OP | GT_OP | GE_OP
+  | (KW_GT | KW_LT | KW_GE | KW_LE | KW_EQ | KW_NE) !DOT
+  | KW_NOT (EQ_OP | NEQ_OP | LT_OP | GT_OP | LE_OP | GE_OP | KW_EQUAL | KW_EQUALS | KW_LESS | KW_GREATER)
+
+
+expression ::= addExpr
+
+addExpr ::= mulExpr ((PLUS | MINUS) mulExpr)* {
+  pin(".*")=1
+}
+
+// SYSTEM_VARIABLE !DOT handles "5*IDENTIFIER" and "VAR *12" patterns where the lexer greedily
+// produces SYSTEM_VARIABLE for "*IDENTIFIER"/"*DIGIT+" tokens. The !DOT guard preserves
+// "T*SAVE-REC.FIELD" patterns where *SAVE-REC (followed by DOT) should parse as sysVarRef.
+// SYSTEM_VARIABLE !DOT !ASSIGN_OP: handles "5*X" and "VAR *12" patterns while preserving
+// "T*SAVE-REC.FIELD" (DOT guard) and "*ERROR := -1" as a new statement (ASSIGN_OP guard).
+mulExpr ::= unaryExpr ((STAR | SLASH | DOUBLE_STAR) unaryExpr | SYSTEM_VARIABLE !DOT !ASSIGN_OP)*
+
+// Write-specific expression hierarchy: identical to addExpr/mulExpr but SLASH is excluded
+// from writeMulExpr operators. In WRITE/DISPLAY/PRINT context SLASH means "advance to next
+// output line" and is handled as a separate writeArg alternative, never as division.
+private writeAddExpr ::= writeMulExpr ((PLUS | MINUS) writeMulExpr)* {
+  pin(".*")=1
+}
+private writeMulExpr ::= unaryExpr ((STAR | DOUBLE_STAR) unaryExpr | SYSTEM_VARIABLE !DOT !ASSIGN_OP)*
+
+unaryExpr ::= (MINUS | PLUS)? primary
+
+primary ::=
+    literal
+  | translateSystemFunction
+  | systemVarRef
+  | KW_SCAN primary
+  | variableRef
+  | maskExpression
+  | KW_OLD subscript subscript?
+  | functionCall
+  | LT_OP expression GT_OP
+  | LPAREN condition RPAREN
+
+// *TRANSLATE(expr, UPPER|LOWER)  — builtin case conversion
+private translateSystemFunction ::= KW_SV_TRANSLATE LPAREN expression COMMA (KW_UPPER | KW_LOWER) RPAREN
+
+// System variable reference — optional subscript for *NUMBER(01), *COUNTER(LES.), *DAGRAPPORTER(*) etc.
+// Use subscript (which handles STAR, expressions, ranges) so that (*) works correctly.
+systemVarRef ::= systemVariables (DOT IDENTIFIER)? subscript?
+
+// System function names that are also keywords — must be listed explicitly so the
+// parser accepts e.g. SUM(...), MAX(...), COUNT(...) inside expressions.
+private systemFunctionName ::=
+    KW_SUM | KW_MAX | KW_MIN | KW_NMIN | KW_COUNT | KW_NCOUNT
+  | KW_AVER | KW_NAVER | KW_OLD | KW_TOTAL
+  | KW_SUBSTRING | KW_SV_TRANSLATE
+
+functionCall ::= (identifier | systemFunctionName) LPAREN expression? ("," expression)* RPAREN {
+  pin=2
+}
+
+// MASK(nnnn' ') — mask content has its own syntax: adjacent identifiers, numbers and string literals
+// Optional trailing field handles "IF field = MASK (pattern) field2" comparison syntax.
+// Guard !ASSIGN_OP !LPAREN !DOT ensures we don't consume the first token of the next statement
+// (assignment "field :=", subscripted "field(", or dotted "group.field").
+maskExpression ::= KW_MASK LPAREN maskAtom+ RPAREN (IDENTIFIER !ASSIGN_OP !LPAREN !DOT)? { pin=1 }
+private maskAtom ::= STRING_LITERAL | IDENTIFIER | NUMBER | COMMA | DOT | PLUS | MINUS | STAR | SLASH
+
+// Keywords that are also used as variable name prefixes (e.g. STEP.RUTINENAVN)
+// KW_COMMAND allows STACK TOP COMMAND 'MENU' to parse COMMAND as an expression token
+private keywordAsVarPrefix ::= KW_STEP | KW_LENGTH | KW_NAME | KW_NUMBER | KW_TEXT | KW_TYPE | KW_SET | KW_MODE | KW_FRAMED | KW_GIVE | KW_LEFT | KW_RIGHT | KW_TOP | KW_ON | KW_OFF | KW_POSITION | KW_COMMAND
+                             | KW_DATA | KW_AS | KW_MAX | KW_MIN | KW_COUNT | KW_SUM | KW_TOTAL | KW_THEM | KW_RECORD | KW_KEYS
+                             | KW_START | KW_PAGE | KW_FULL | KW_ISN | KW_NE | KW_EQ | KW_GT | KW_LT | KW_GE | KW_LE
+                             | KW_JUSTIFIED | KW_ONCE | KW_BOTTOM | KW_MAP | KW_INDEX | KW_DELETE | KW_SCAN | KW_FIRST | KW_HELP
+                             | KW_IN | KW_KEY | KW_SAME | KW_SELECT | KW_FILE | KW_LINES | KW_RESULT
+
+// sessionParameter: allows LS, PS, CD etc. to be used as standalone variables (ADD 1 TO LS)
+variableRef ::= (USER_VARIABLE | systemVariables | IDENTIFIER | SUBST_PARAM | keywordAsVarPrefix | sessionParameter) ("." (IDENTIFIER | SUBST_PARAM | keywordAsVarPrefix | KW_VALUES | KW_ISN | KW_FULL | KW_MODIFIED | KW_READ | KW_WRITE | KW_PRINT | KW_MOVE | KW_FORMAT | KW_RESET | KW_DISPLAY | KW_STORE | KW_UPDATE | KW_CLOSE | KW_OPEN | KW_REJECT | KW_ACCEPT | KW_GET | KW_FIND | KW_SORT | KW_FOR | KW_REPEAT | KW_INPUT | KW_FETCH | KW_CALL | KW_STOP | KW_ESCAPE | KW_EXAMINE | KW_COMPRESS | KW_RELEASE | KW_REDUCE | KW_EXPAND | sessionParameter))* subscript? {
+  pin=1
+  mixin="com.appweb.natural.intellij.psi.NaturalVariableRefMixin"
+  methods=[getName]
+}
+
+// Parenthesised attribute after a variable: either a subscript range or a session-parameter group
+// e.g. VAR(1:10)  or  VAR(EM=YYMM)  or  VAR(AL=2,IS=ON)
+subscript ::= "(" (subscriptParamGroup | subscriptRange? ("," subscriptRange)*) ")"
+
+// One or more session-parameter assignments: EM=ZZZZZZ,ZZZ,ZZ9.99  AL=2  IS=ON …
+// editMaskValue allows commas that are NOT followed by another session parameter, so that
+// edit-mask values like ZZZZZZ,ZZZ,ZZ9.99 are consumed as a single value.
+private subscriptParamGroup ::= sessionParameter EQ_OP editMaskValue ("," sessionParameter EQ_OP editMaskValue)*
+private editMaskValue ::= (editMaskAtom | editMaskComma)+
+// NEQ_OP covers "NE" colour code; CARET covers ^ separator; LT_OP/GT_OP cover <NEI+GR> style values
+// sessionParameter covers values like (AD=IP) where IP is SP_IP
+// KW_AT covers AD=AT'.' style attribute values; GE_OP covers >= in edit contexts
+private editMaskAtom ::= KW_ON | KW_OFF | KW_AT | GE_OP | LE_OP | STRING_LITERAL | IDENTIFIER | NUMBER | DOT | COLON | PLUS | MINUS | STAR | SLASH | NEQ_OP | EQ_OP | CARET | PERCENT | LT_OP | GT_OP | editMaskNestedParen | dataType | sessionParameter
+// Parenthesised sub-expression in an edit mask: 9(3) means 3 repetitions of digit 9
+private editMaskNestedParen ::= LPAREN (editMaskAtom | editMaskComma)* RPAREN
+private editMaskComma ::= COMMA !sessionParameter
+
+// Block label keywords used as subscript qualifiers: *ISN (READ.) *ISN (FIND.) etc.
+// Must be listed before expression to avoid trying READ etc. as expressions.
+private subscriptLabelKeyword ::= KW_FIND | KW_READ | KW_REPEAT | KW_FOR | KW_GET | KW_SORT | KW_PERFORM
+subscriptRange ::= STAR | subscriptLabelKeyword DOT | expression DOT? (":" expression DOT?)?
+
+// DOT NUMBER handles leading-dot decimal literals like .25 (written without leading zero)
+private literal ::= STRING_LITERAL | NUMBER | (DOT NUMBER) | DATE_LITERAL | TIME_LITERAL | TIMESTAMP_LITERAL
+  | HEX_LITERAL | UNICODE_HEX_LITERAL | KW_TRUE | KW_FALSE
+  | dataType
+
+private numberStringOrIdentifier ::= NUMBER | stringOrIdentifier
+private stringOrIdentifier ::= STRING_LITERAL | identifier
+
+private descriptor ::= identifier | STRING_LITERAL
+private identifier ::= systemVariables | ((USER_VARIABLE | IDENTIFIER DOT (IDENTIFIER | KW_ISN | KW_DELETE) | IDENTIFIER | SP_MS | keywordAsVarPrefix) (LPAREN NUMBER (COLON NUMBER)? RPAREN)?)
+
+private systemVariables ::=
+    SYSTEM_VARIABLE | SV_DATX | SV_USER |
+    // Application-related
+    SV_APPLIC_ID | SV_APPLIC_NAME | SV_COM | SV_CONVID | SV_COUNTER | SV_CPU_TIME |
+    SV_CURRENT_UNIT | SV_DATA | SV_ERROR_LINE | SV_ERROR_NR | SV_ERROR_TA | SV_ETID |
+    SV_ISN | SV_LBOUND | SV_LENGTH | SV_LEVEL | SV_LIBRARY_ID | SV_LINE | SV_LINEX |
+    SV_LOAD_LIBRARY_ID | SV_NUMBER | SV_OCCURRENCE | SV_PAGE_EVENT | SV_PAGE_LEVEL |
+    SV_PROGRAM | SV_REINPUT_TYPE | SV_ROWCOUNT | SV_STARTUP | SV_STEPLIB |
+    SV_SUBROUTINE | SV_THIS_OBJECT | SV_TYPE | SV_UBOUND |
+    // Date/Time
+    SV_DATD | SV_DAT4D | SV_DATE | SV_DAT4E | SV_DATG | SV_DATI | SV_DAT4I |
+    SV_DATJ | SV_DAT4J | SV_DATN | SV_DATU | SV_DAT4U | SV_DATV | SV_DATVS |
+    SV_TIMD | SV_TIME | SV_TIME_OUT | SV_TIMESTMP | SV_TIMN | SV_TIMX |
+    // Input/Output
+    SV_CURS_COL | SV_CURS_FIELD | SV_CURS_LINE | SV_CURSOR | SV_LINE_COUNT |
+    SV_LINESIZE | SV_LOG_LS | SV_LOG_PS | SV_PAGE_NUMBER | SV_PAGESIZE |
+    SV_PF_KEY | SV_PF_NAME | SV_WINDOW_LS | SV_WINDOW_POS | SV_WINDOW_PS |
+    // Natural environment
+    SV_BROWSER_IO | SV_DEVICE | SV_GROUP | SV_HARDCOPY | SV_INIT_USER | SV_LANGUAGE |
+    SV_NATVERS | SV_NET_USER | SV_PARM_USER | SV_PATCH_LEVEL | SV_PID | SV_SCREEN_IO |
+    SV_SERVER_TYPE | SV_UI | SV_USER_NAME |
+    // System environment
+    SV_CODEPAGE | SV_HARDWARE | SV_HOSTNAME | SV_INIT_ID | SV_INIT_PROGRAM | SV_LOCALE |
+    SV_MACHINE_CLASS | SV_OPSYS | SV_OS | SV_OSVERS | SV_TP | SV_TPSYS | SV_TPVERS |
+    SV_WINMGR | SV_WINMGRVERS |
+    // XML
+    SV_PARSE_COL | SV_PARSE_LEVEL | SV_PARSE_NAMESPACE_URI | SV_PARSE_ROW | SV_PARSE_TYPE
+
+private sessionParameterSpec ::= LPAREN (sessionParameter EQ_OP editMaskValue)+ RPAREN
+private sessionParameter ::=
+  SP_AD | SP_AL | SP_CD | SP_DF | SP_DL | SP_DY | SP_EM | SP_ES | SP_FC | SP_FL | SP_GC | SP_HC | SP_HW
+  | SP_IC | SP_ICU | SP_IP | SP_IS | SP_KD | SP_LC | SP_LCU | SP_LS | SP_MC | SP_MP | SP_MS
+  | SP_NL | SP_PC | SP_PM | SP_PS | SP_SF | SP_SG | SP_TC | SP_TCU | SP_UC | SP_ZP

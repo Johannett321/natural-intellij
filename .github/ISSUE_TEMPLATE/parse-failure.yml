@@ -1,0 +1,64 @@
+name: Parse failure
+description: The plugin reports an error on Natural code that your compiler accepts
+labels: [grammar]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Parse failures are the most useful bug reports this project gets.
+
+        **Please do not paste proprietary source.** Rewrite the snippet with generic names
+        (`CUSTOMER`, `#COUNTER`, `FIELD-A`) before posting — the grammar does not care what
+        your fields are called. Reports containing real business identifiers, internal project
+        codes or customer data will be edited or closed.
+  - type: textarea
+    id: snippet
+    attributes:
+      label: Minimal reproduction
+      description: The smallest complete object that still shows the error, with generic names.
+      render: text
+      placeholder: |
+        DEFINE DATA LOCAL
+          1 FIELD-A (A8)
+        END-DEFINE
+        ...
+        END
+    validations:
+      required: true
+  - type: input
+    id: error
+    attributes:
+      label: Error reported
+      description: The message, with line and column.
+      placeholder: "L12:C38 expected END-IF, found 'GT'"
+    validations:
+      required: true
+  - type: dropdown
+    id: objtype
+    attributes:
+      label: Object type
+      options: [NSP program, NSN subprogram, NSS subroutine, NSC copycode, NSD DDM, NSG GDA, NSL LDA, NPD PDA, NSM map, NST text]
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Natural platform
+      description: Accepted syntax differs between platforms.
+      options: [Mainframe (z/OS, VSE, BS2000), Linux/UNIX, Windows, Not sure]
+    validations:
+      required: true
+  - type: input
+    id: natversion
+    attributes:
+      label: Natural version
+      placeholder: "9.1.1"
+  - type: checkboxes
+    id: compiles
+    attributes:
+      label: Confirmation
+      options:
+        - label: This snippet compiles cleanly with my Natural compiler
+          required: true
+        - label: I have replaced all proprietary names and data with generic placeholders
+          required: true

@@ -1,0 +1,16 @@
+// This is a generated file. Not intended for manual editing.
+package com.appweb.natural.intellij.psi;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.psi.PsiElement;
+
+public interface NaturalRangeSpecOption3C extends PsiElement {
+
+  @NotNull
+  NaturalExpression getExpression();
+
+  @NotNull
+  NaturalLessEqualOrGreaterClause getLessEqualOrGreaterClause();
+
+}

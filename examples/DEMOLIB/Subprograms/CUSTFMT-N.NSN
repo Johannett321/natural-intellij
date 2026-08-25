@@ -1,0 +1,28 @@
+/** Formats a customer name and balance for display.
+/**
+/** Joins the first and last name into a single field and renders the balance
+/** with a thousands-separated edit mask.
+/**
+/** :author Natural for IntelliJ example
+DEFINE DATA
+PARAMETER USING CUSTFMTA
+LOCAL
+1 #TRIMMED-FIRST (A20)
+1 #TRIMMED-LAST  (A30)
+END-DEFINE
+*
+RESET P-FULL-NAME P-AMOUNT-TEXT P-RETURN-CODE
+*
+MOVE P-FIRST-NAME TO #TRIMMED-FIRST
+MOVE P-LAST-NAME  TO #TRIMMED-LAST
+*
+IF #TRIMMED-LAST = ' '
+  MOVE 4 TO P-RETURN-CODE
+  ESCAPE ROUTINE
+END-IF
+*
+COMPRESS #TRIMMED-FIRST #TRIMMED-LAST INTO P-FULL-NAME
+*
+MOVE EDITED P-BALANCE (EM=ZZZ:ZZZ:ZZ9.99) TO P-AMOUNT-TEXT
+*
+END

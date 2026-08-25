@@ -1,0 +1,53 @@
+name: Bug report
+description: Something in the plugin misbehaves
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: For errors parsing Natural code, please use the **Parse failure** template instead.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open a .NSP file
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: ide
+    attributes:
+      label: IDE version
+      placeholder: "IntelliJ IDEA 2025.2.6 (Community)"
+    validations:
+      required: true
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: ndv
+    attributes:
+      label: Build type
+      options: [Downloaded release (core only), Built from source with NDV server support, Built from source without NDV]
+  - type: textarea
+    id: stacktrace
+    attributes:
+      label: Stack trace or IDE log
+      description: From Help → Show Log in Finder/Explorer, if there is anything relevant.
+      render: text

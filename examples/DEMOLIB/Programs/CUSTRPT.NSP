@@ -1,0 +1,80 @@
+/** Customer balance report.
+/**
+/** Demonstrates the Natural constructs this plugin understands: a DEFINE DATA
+/** section using an LDA, a READ loop, DECIDE and IF blocks, MASK validation,
+/** an inline subroutine, a CALLNAT to a subprogram and an ON ERROR handler.
+/**
+/** :author Natural for IntelliJ example
+DEFINE DATA
+LOCAL USING CUSTL
+END-DEFINE
+*
+RESET #TOTALS
+*
+WRITE 'Customer balance report'
+  / '======================='
+  /
+*
+READ CUSTOMER BY CUSTOMER-ID FROM 1 THRU 99999999
+  /* Skip records whose postal code is not five digits.
+  IF CUSTOMER.POSTAL-CODE ^= MASK(nnnnn)
+    ESCAPE TOP
+  END-IF
+*
+  PERFORM VALIDATE-CUSTOMER
+  IF NOT #IS-VALID
+    ESCAPE TOP
+  END-IF
+*
+  DECIDE ON FIRST VALUE OF CUSTOMER.STATUS
+    VALUE 'A'
+      MOVE 'Active'   TO #STATUS-TEXT
+    VALUE 'C'
+      MOVE 'Closed'   TO #STATUS-TEXT
+    VALUE 'S'
+      MOVE 'Suspended' TO #STATUS-TEXT
+    NONE VALUE
+      MOVE 'Unknown'  TO #STATUS-TEXT
+  END-DECIDE
+*
+  CALLNAT 'CUSTFMT-N'
+    CUSTOMER.FIRST-NAME
+    CUSTOMER.LAST-NAME
+    CUSTOMER.BALANCE
+    #FULL-NAME
+    #DISPLAY-AMOUNT
+    #WORK.#IS-VALID
+*
+  ADD 1 TO #COUNT
+  ADD CUSTOMER.BALANCE TO #SUM-BALANCE
+*
+  WRITE CUSTOMER.CUSTOMER-ID (EM=99999999)
+        #FULL-NAME
+        #DISPLAY-AMOUNT
+        #STATUS-TEXT
+END-READ
+*
+IF #COUNT > 0
+  DIVIDE #COUNT INTO #SUM-BALANCE GIVING #AVG-BALANCE
+END-IF
+*
+WRITE / 'Customers processed:' #COUNT
+      / 'Total balance     :' #SUM-BALANCE (EM=ZZZ:ZZZ:ZZ9.99)
+      / 'Average balance   :' #AVG-BALANCE (EM=ZZZ:ZZZ:ZZ9.99)
+*
+DEFINE SUBROUTINE VALIDATE-CUSTOMER
+  MOVE TRUE TO #IS-VALID
+  IF CUSTOMER.LAST-NAME = ' '
+    MOVE FALSE TO #IS-VALID
+  END-IF
+  IF CUSTOMER.STATUS = 'C' OR = 'X'
+    MOVE FALSE TO #IS-VALID
+  END-IF
+END-SUBROUTINE
+*
+ON ERROR
+  INCLUDE ERRHDL
+  TERMINATE 99
+END-ERROR
+*
+END

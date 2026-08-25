@@ -1,0 +1,22 @@
+name: Feature request
+description: Suggest an improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: What are you trying to do?
+      description: >
+        Describe the Natural development workflow you want to accomplish, rather than a specific
+        UI. There is often an existing IntelliJ idiom that fits better than the obvious design.
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: How do you do it today?
+      description: In NaturalONE, on a terminal, by hand — whatever the current workaround is.
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you have in mind

@@ -1,0 +1,28 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+/** Local data area for the customer reporting example.
+1 CUSTOMER
+  2 CUSTOMER-ID      (N8)
+  2 NAME
+    3 FIRST-NAME     (A20)
+    3 LAST-NAME      (A30)
+  2 ADDRESS
+    3 STREET         (A40)
+    3 POSTAL-CODE    (A5)
+    3 CITY           (A30)
+  2 BALANCE          (P9.2)
+  2 STATUS           (A1)
+  2 REGISTERED-DATE  (D)
+1 #TOTALS
+  2 #COUNT           (I4)
+  2 #SUM-BALANCE     (P11.2)
+  2 #AVG-BALANCE     (P11.2)
+1 #WORK
+  2 #FULL-NAME       (A52)
+  2 #DISPLAY-AMOUNT  (A20)
+  2 #STATUS-TEXT     (A10)
+  2 #IS-VALID        (L)
+END-DEFINE

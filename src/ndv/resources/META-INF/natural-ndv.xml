@@ -1,0 +1,57 @@
+<!--
+  Natural Development Server (NDV/SPoD) integration.
+
+  This descriptor is only present in builds made with the Software AG NaturalONE client
+  libraries available locally (see README, "Building with NDV server support"). The core
+  plugin includes it via an optional <xi:include> with an <xi:fallback/>, so a build made
+  without those libraries simply omits every extension registered here.
+-->
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Natural Servers"
+                    anchor="left"
+                    secondary="false"
+                    icon="/icons/naturalServers.svg"
+                    factoryClass="com.appweb.natural.intellij.toolwindow.NdsToolWindowFactory"/>
+
+        <applicationService serviceImplementation="com.appweb.natural.intellij.nds.NdsServerSettings"/>
+        <applicationConfigurable
+            parentId="tools"
+            id="com.appweb.natural.intellij.nds.NdsServerConfigurable"
+            instance="com.appweb.natural.intellij.nds.NdsServerConfigurable"
+            displayName="Natural Servers"/>
+
+        <configurationType implementation="com.appweb.natural.intellij.debug.NaturalDebugConfigurationType"/>
+        <programRunner implementation="com.appweb.natural.intellij.debug.NaturalDebugRunner"/>
+        <xdebugger.breakpointType implementation="com.appweb.natural.intellij.debug.NaturalLineBreakpointType"/>
+    </extensions>
+
+    <actions>
+        <action id="Natural.CompareWithServerVersion"
+                class="com.appweb.natural.intellij.compare.CompareWithServerVersionAction"
+                text="Compare with Server Version"
+                description="Compare this Natural file with the matching object on a Natural Development Server">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <action id="Natural.Stow"
+                class="com.appweb.natural.intellij.actions.StowAction"
+                text="Stow on Server"
+                description="Compile and save this Natural object on the Natural Development Server"
+                icon="/icons/naturalStow.svg">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="MainToolbarRight" anchor="before" relative-to-action="RunToolbarMainActionGroup"/>
+        </action>
+        <action id="Natural.Check"
+                class="com.appweb.natural.intellij.actions.CheckAction"
+                text="Check on Server"
+                description="Run a syntax check of this Natural object on the Natural Development Server"
+                icon="AllIcons.Actions.Compile">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="MainToolbarRight" anchor="before" relative-to-action="Natural.Stow"/>
+        </action>
+    </actions>
+</idea-plugin>
