@@ -194,8 +194,6 @@
         <searchEverywhereContributor
             implementation="com.appweb.natural.intellij.nickname.NaturalNicknameSearchContributorFactory"/>
 
-        <fileEditorProvider implementation="com.appweb.natural.intellij.mapeditor.NaturalMapEditorProvider"/>
-
         <toolWindow id="Natural Run"
                     anchor="bottom"
                     factoryClass="com.appweb.natural.intellij.run.NaturalRunToolWindowFactory"

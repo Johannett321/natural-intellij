@@ -1,0 +1,55 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP ISO_8859-1:1987
+* :LineIncrement 10
+* <Natural Source Header
+* MAP2: PROTOTYPE              --- CUSTOMER MAINTENANCE SCREEN ---
+* INPUT USING MAP 'CUSTMAP'
+DEFINE DATA PARAMETER
+1  CV-MAP (C)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=ON  IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024080                                                               *
+************************************************************************
+INPUT          (     CV=CV-MAP                                        /*
+                                                                       )
+ 029T 'CUSTOMER MAINTENANCE'
+/
+/
+ 003T 'Customer ID  :'
+ 020T CUSTOMER-ID             (AD=MIL'_' CV=CV-MAP) /*.01D008 N008.
+ 040T 'Status :'
+ 049T STATUS                  (AD=MIL'_' CV=CV-MAP) /*.02D001 A001.
+/
+/
+ 003T 'First name   :'
+ 020T FIRST-NAME              (AD=MIL'_' CV=CV-MAP) /*.03D020 A020.
+/
+ 003T 'Last name    :'
+ 020T LAST-NAME               (AD=MIL'_' CV=CV-MAP) /*.04D030 A030.
+/
+/
+ 003T 'Street       :'
+ 020T STREET                  (AD=MIL'_' CV=CV-MAP) /*.05D040 A040.
+/
+ 003T 'Postal code  :'
+ 020T POSTAL-CODE             (AD=MIL'_' CV=CV-MAP) /*.06D005 A005.
+ 030T 'City :'
+ 038T CITY                    (AD=MIL'_' CV=CV-MAP) /*.07D030 A030.
+/
+/
+ 003T 'Balance      :'
+ 020T BALANCE                 (AD=OIL'_' EM=ZZZ:ZZZ:ZZ9.99) /*.08D014 P009.
+/
+ 003T 'Registered   :'
+ 020T REGISTERED-DATE         (AD=OIL'_' EM=YYYY-MM-DD) /*.09D010 D.
+/
+/
+/
+/
+ 003T 'PF3=Exit   PF5=Save   PF7=Prev   PF8=Next'
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

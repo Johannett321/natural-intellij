@@ -32,6 +32,20 @@ integration with Natural Development Servers for browsing, compiling and debuggi
 
 It is free and open source, with no telemetry, no accounts and no paid tier.
 
+## Project status — please read
+
+**This is a community side project, not a finished product.** Plenty of things do not work yet.
+There are bugs, there are missing features, and there are corners of the Natural language the
+grammar does not cover. The goal was never perfection — it was *good enough to be genuinely
+useful*, which it already is for everyday work.
+
+It is also not anyone's main priority, so progress comes in bursts. **That makes contributions
+very welcome** — especially reports of Natural code the parser gets wrong, which are the single
+most useful thing you can send.
+
+If you are evaluating this for a team: expect a helpful tool with rough edges, not a replacement
+for a supported vendor product.
+
 ## Features
 
 | | Feature | What it does |
@@ -163,6 +177,12 @@ variables and every variable in scope.
 
 <img src="docs/images/completion.png" alt="Code completion popup in a Natural program offering COMPOSE, COMPRESS and COMPUTE" width="100%">
 
+**Map editor.** `.NSM` screen maps open in a visual editor on the real 80×24 terminal grid, with a
+properties panel for Natural session parameters — attribute definition, edit mask, control
+variable, helproutine — and a `Text` tab for editing the source directly.
+
+<img src="docs/images/map-editor.png" alt="Natural .NSM map open in the visual map editor showing a customer maintenance screen on an 80x24 grid with a session-parameter properties panel" width="100%">
+
 ---
 
 ## Installing
@@ -271,10 +291,34 @@ plenty of dialect variation, so **parse failures on real code are the most usefu
 report**. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to file one with a minimal
 reproduction (and without pasting anything proprietary).
 
+## Disclaimers
+
+**Not a commercial project, and not monetising anyone else's product.** There is no paid tier, no
+licence to buy, no donations, no ads and no telemetry. Nobody is making money from this, and there
+is no attempt to profit from Software AG's products or brand. It exists for one reason: Natural
+developers deserve the same tooling everyone else has. A lot of Natural code is maintained by
+people who joined the industry with modern editors, and asking them to give that up is a real
+barrier — both to their productivity and to the long-term maintainability of these systems. This
+is a community effort to close some of that gap.
+
+**Maturity.** As set out under [Project status](#project-status--please-read): expect bugs,
+missing features and incomplete grammar coverage. Please report what breaks rather than assuming
+it is meant to be that way.
+
+**Built largely with AI assistance.** Most of this plugin — the grammar, the PSI model, the IDE
+integrations and much of this documentation — was written with substantial help from AI coding
+tools, with human direction and review. It is mentioned because it is relevant when you read the
+code: it is reviewed and it works, but it was not hand-written line by line, and that is worth
+knowing before you rely on any particular part of it.
+
+**No warranty.** Provided as-is under the Apache License 2.0. Verify anything it tells you about
+your own source before acting on it, particularly where it writes to a Natural Development Server.
+
 ## Licence and third-party code
 
 This project is licensed under the [Apache License 2.0](LICENSE). Third-party components and
 trademark notes are listed in [`NOTICE`](NOTICE).
 
 Natural, NaturalONE and Software AG are trademarks of their respective owners. This is an
-independent, unaffiliated project and is not endorsed by or supported by Software AG or IBM.
+independent, unaffiliated project and is not endorsed by, affiliated with, or supported by
+Software AG or IBM.

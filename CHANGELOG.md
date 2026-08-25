@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 1.0.1
+
+### Fixed
+
+- The `.NSM` map editor registered its editor provider twice, so map files opened with two
+  identical **Map Editor** tabs.
+
+### Added
+
+- A sample `.NSM` screen map in the example library (`examples/DEMOLIB/Maps/CUSTMAP.NSM`).
+
 ## 1.0.0
 
 First public release.
