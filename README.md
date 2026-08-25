@@ -155,8 +155,9 @@ END-READ
 ```
 
 A complete, self-contained example library lives in [`examples/DEMOLIB`](examples/DEMOLIB) —
-a program, a subprogram, a copycode, a local data area and a parameter data area that between
-them exercise most of the grammar.
+a program, a subprogram, a copycode, a screen map, a local data area and a parameter data area
+that between them exercise most of the grammar. It also carries a NaturalDoc file for the
+subprogram, so hover documentation works as soon as you open it.
 
 Official language reference: <https://documentation.softwareag.com/natural/nat921unx/webhelp/natux-webhelp/>
 
@@ -176,6 +177,12 @@ readable without opening the LDA.
 variables and every variable in scope.
 
 <img src="docs/images/completion.png" alt="Code completion popup in a Natural program offering COMPOSE, COMPRESS and COMPUTE" width="100%">
+
+**Documentation on hover.** Hovering a `CALLNAT` target resolves the subprogram and renders its
+NaturalDoc — a Markdown file kept alongside the library — so a module's parameters and return
+codes are one hover away instead of a file away. Data areas and copycodes work the same way.
+
+<img src="docs/images/naturaldoc-hover.png" alt="Hovering the CALLNAT target CUSTFMT-N shows a documentation popup with a rendered parameter table and return codes" width="100%">
 
 **Map editor.** `.NSM` screen maps open in a visual editor on the real 80×24 terminal grid, with a
 properties panel for Natural session parameters — attribute definition, edit mask, control
