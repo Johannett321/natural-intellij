@@ -8,7 +8,7 @@ icu4j = "67.1"
 # plugins
 changelog = "2.5.0"
 grammarKit = "2023.3.0.3"
-intelliJPlatform = "2.13.1"
+intelliJPlatform = "2.18.1"
 kotlin = "2.3.20"
 kover = "0.9.7"
 qodana = "2025.3.2"
