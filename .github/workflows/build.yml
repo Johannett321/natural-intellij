@@ -24,7 +24,7 @@ jobs:
           java-version: 21
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
 
       # The published plugin must never contain Software AG code. src/main must not
       # reference it, and the proprietary jars must never be committed.
