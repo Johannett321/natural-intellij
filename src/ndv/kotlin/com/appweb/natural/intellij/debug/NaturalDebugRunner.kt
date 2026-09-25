@@ -44,6 +44,7 @@ class NaturalDebugRunner : GenericProgramRunner<com.intellij.execution.configura
                         library = library,
                         obj = obj,
                         parameter = parameter,
+                        encoding = server.encoding,
                     )
                     val locator = NaturalSourceLocator(environment.project)
                     return NaturalDebugProcess(session, debugSession, locator, console)

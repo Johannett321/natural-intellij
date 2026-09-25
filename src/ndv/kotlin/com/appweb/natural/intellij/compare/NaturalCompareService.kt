@@ -39,7 +39,8 @@ object NaturalCompareService {
                 try {
                     val password = NdsServerSettings.getInstance().getPassword(server)
                     val source = NdsClient.connect(
-                        server.host, server.port, server.user, password, server.logonLibrary
+                        server.host, server.port, server.user, password, server.logonLibrary,
+                        server.encoding,
                     ).use { it.downloadSource(libraryName, info) }
                     onEdt { openDiff(project, server, libraryName, info, localFile, source) }
                 } catch (e: Throwable) {

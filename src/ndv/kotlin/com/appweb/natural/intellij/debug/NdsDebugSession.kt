@@ -263,8 +263,8 @@ class NdsDebugSession private constructor(
             library: String,
             obj: String,
             parameter: String = "",
+            encoding: String = NdsClient.DEFAULT_ENCODING,
         ): NdsDebugSession {
-            NdsClient.ensureClientCodePage()
             val io = Executors.newSingleThreadExecutor { r ->
                 Thread(r, "nds-debug-io").apply { isDaemon = true }
             }
@@ -276,7 +276,7 @@ class NdsDebugSession private constructor(
                 ConnectKey.PASSWORD to password,
             )
             val future = io.submit(Callable<Unit> {
-                tx.connect(params)
+                NdsClient.connectWithEncoding(tx, params, encoding)
                 tx.logon(library)
             })
             val deadline = System.nanoTime() + DEFAULT_TIMEOUT_NS

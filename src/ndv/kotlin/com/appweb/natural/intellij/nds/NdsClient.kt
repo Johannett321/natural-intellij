@@ -37,7 +37,8 @@ import java.util.concurrent.TimeoutException
  *    charset in the `one.server.clientcodepage` system property, falling back to the JVM
  *    default (typically UTF-8). Servers using ISO-8859-1 then return non-ASCII characters such
  *    as Æ Ø Å as U+FFFD, and the mangled name cannot be used to download the object.
- *    [ensureClientCodePage] sets the property before every connect.
+ *    [connectWithEncoding] sets the property per connect from the server's configured
+ *    [NdsServer.encoding].
  */
 class NdsClient private constructor(
     private val tx: PalTransactions,
@@ -179,14 +180,21 @@ class NdsClient private constructor(
         const val COMPILE_TIMEOUT_SEC = 120
         const val MAX_USER_LEN = 8
 
+        const val DEFAULT_ENCODING = "ISO-8859-1"
+        val ENCODING_CHOICES = listOf("ISO-8859-1", "UTF-8", "windows-1252", "ISO-8859-15")
+
         /** Read by PalTransactions.connect() to pick the charset for server strings. */
         private const val CLIENT_CODEPAGE_PROPERTY = "one.server.clientcodepage"
-        private const val DEFAULT_CLIENT_CODEPAGE = "ISO-8859-1"
+        private val CONNECT_LOCK = Any()
 
-        /** Must be called before [PalTransactions.connect]. Respects a value set via vmoptions. */
-        fun ensureClientCodePage() {
-            if (System.getProperty(CLIENT_CODEPAGE_PROPERTY).isNullOrBlank()) {
-                System.setProperty(CLIENT_CODEPAGE_PROPERTY, DEFAULT_CLIENT_CODEPAGE)
+        /**
+         * [PalTransactions.connect] only takes the charset from a JVM-wide system property, so
+         * set it and connect under a lock to keep concurrent connects to different servers apart.
+         */
+        fun connectWithEncoding(tx: PalTransactions, params: Map<String, String>, encoding: String) {
+            synchronized(CONNECT_LOCK) {
+                System.setProperty(CLIENT_CODEPAGE_PROPERTY, encoding.ifBlank { DEFAULT_ENCODING })
+                tx.connect(params)
             }
         }
 
@@ -212,9 +220,9 @@ class NdsClient private constructor(
             user: String,
             password: String,
             logonLibrary: String,
+            encoding: String = DEFAULT_ENCODING,
         ): NdsClient {
             ASYNC_FAILED.set(false)
-            ensureClientCodePage()
             val io = Executors.newSingleThreadExecutor { r ->
                 Thread(r, "nds-io").apply { isDaemon = true }
             }
@@ -228,7 +236,7 @@ class NdsClient private constructor(
             // Run connect+logon under the same watchdog discipline.
             val deadlineNs = System.nanoTime() + CALL_TIMEOUT_SEC * 1_000_000_000L
             val future = io.submit(Callable<Unit> {
-                tx.connect(params)
+                connectWithEncoding(tx, params, encoding)
                 tx.logon(logonLibrary)
             })
             while (true) {

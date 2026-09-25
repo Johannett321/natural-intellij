@@ -115,7 +115,8 @@ abstract class NdsCompileActionBase(
                 try {
                     val password = NdsServerSettings.getInstance().getPassword(server)
                     NdsClient.connect(
-                        server.host, server.port, server.user, password, server.logonLibrary
+                        server.host, server.port, server.user, password, server.logonLibrary,
+                        server.encoding,
                     ).use { client ->
                         val library = pickLibrary(project, client, libraryGuess) ?: return@use
                         invoke(client, library, objectName, extension, sourceLines)

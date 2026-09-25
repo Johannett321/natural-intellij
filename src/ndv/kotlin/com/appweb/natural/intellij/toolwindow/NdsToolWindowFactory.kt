@@ -494,7 +494,9 @@ private class NdsServerPanel(private val project: Project) : JPanel(BorderLayout
 
     private fun openClient(server: NdsServer): NdsClient {
         val password = NdsServerSettings.getInstance().getPassword(server)
-        return NdsClient.connect(server.host, server.port, server.user, password, server.logonLibrary)
+        return NdsClient.connect(
+            server.host, server.port, server.user, password, server.logonLibrary, server.encoding,
+        )
     }
 
     private fun runBackground(title: String, body: () -> Unit) {

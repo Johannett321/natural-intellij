@@ -1,7 +1,9 @@
 package com.appweb.natural.intellij.nds
 
 import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.DialogWrapper
+import com.intellij.openapi.ui.ValidationInfo
 import com.intellij.openapi.ui.Messages
 import com.intellij.ui.AnActionButton
 import com.intellij.ui.ToolbarDecorator
@@ -127,6 +129,12 @@ class NdsServerConfigurable : Configurable {
         private val portField    = JTextField(server.port.toString(), 6)
         private val userField    = JTextField(server.user, 12)
         private val passwordField = JPasswordField(20)
+        private val encodingField = ComboBox(NdsClient.ENCODING_CHOICES.toTypedArray()).apply {
+            isEditable = true
+            selectedItem = server.encoding
+        }
+        private val encodingText: String
+            get() = (encodingField.editor.item ?: encodingField.selectedItem)?.toString()?.trim().orEmpty()
 
         var resultPassword: CharArray? = null; private set
         var passwordCleared: Boolean = false; private set
@@ -136,6 +144,7 @@ class NdsServerConfigurable : Configurable {
             host = hostField.text.trim(),
             port = portField.text.trim().toIntOrNull() ?: server.port,
             user = userField.text.trim(),
+            encoding = encodingText.ifEmpty { NdsClient.DEFAULT_ENCODING },
             // logonLibrary is hardcoded to SYSTEM; preserved field for any pre-existing config.
         )
 
@@ -162,8 +171,15 @@ class NdsServerConfigurable : Configurable {
             row("Port:",         portField)
             row("User:",         userField)
             row("Password:",     passwordField)
+            row("Encoding:",     encodingField)
             panel.border = JBUI.Borders.empty(8)
             return panel
+        }
+
+        override fun doValidate(): ValidationInfo? {
+            val name = encodingText
+            val supported = name.isEmpty() || runCatching { java.nio.charset.Charset.isSupported(name) }.getOrDefault(false)
+            return if (supported) null else ValidationInfo("Unknown charset '$name'", encodingField)
         }
 
         override fun doOKAction() {
