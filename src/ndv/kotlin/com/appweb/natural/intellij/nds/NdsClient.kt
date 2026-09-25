@@ -33,9 +33,11 @@ import java.util.concurrent.TimeoutException
  *    listObjects on the same connection overflows an internal 50-byte buffer). The fix is to
  *    open a fresh NDV connection per "session" of work; callers should use the [forLibrary]
  *    factory or short-lived [use] blocks.
- *  - Server bytes are read with the JVM default charset. Object and library names may contain
- *    non-ASCII characters, so set -Dfile.encoding=ISO-8859-1 at JVM launch — for an IntelliJ
- *    plugin that means the IDE's vmoptions. We additionally decode names ourselves where possible.
+ *  - PalTransactions decodes server strings (object names, library names, ...) with the
+ *    charset in the `one.server.clientcodepage` system property, falling back to the JVM
+ *    default (typically UTF-8). Servers using ISO-8859-1 then return non-ASCII characters such
+ *    as Æ Ø Å as U+FFFD, and the mangled name cannot be used to download the object.
+ *    [ensureClientCodePage] sets the property before every connect.
  */
 class NdsClient private constructor(
     private val tx: PalTransactions,
@@ -177,6 +179,17 @@ class NdsClient private constructor(
         const val COMPILE_TIMEOUT_SEC = 120
         const val MAX_USER_LEN = 8
 
+        /** Read by PalTransactions.connect() to pick the charset for server strings. */
+        private const val CLIENT_CODEPAGE_PROPERTY = "one.server.clientcodepage"
+        private const val DEFAULT_CLIENT_CODEPAGE = "ISO-8859-1"
+
+        /** Must be called before [PalTransactions.connect]. Respects a value set via vmoptions. */
+        fun ensureClientCodePage() {
+            if (System.getProperty(CLIENT_CODEPAGE_PROPERTY).isNullOrBlank()) {
+                System.setProperty(CLIENT_CODEPAGE_PROPERTY, DEFAULT_CLIENT_CODEPAGE)
+            }
+        }
+
         private val ASYNC_FAILED = ThreadLocal.withInitial { false }
 
         init {
@@ -201,6 +214,7 @@ class NdsClient private constructor(
             logonLibrary: String,
         ): NdsClient {
             ASYNC_FAILED.set(false)
+            ensureClientCodePage()
             val io = Executors.newSingleThreadExecutor { r ->
                 Thread(r, "nds-io").apply { isDaemon = true }
             }

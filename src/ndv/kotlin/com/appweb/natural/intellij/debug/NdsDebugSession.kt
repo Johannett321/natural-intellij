@@ -1,5 +1,6 @@
 package com.appweb.natural.intellij.debug
 
+import com.appweb.natural.intellij.nds.NdsClient
 import com.appweb.natural.intellij.nds.NdsException
 import com.softwareag.naturalone.natural.pal.PalTypeDbgStackFrame
 import com.softwareag.naturalone.natural.pal.external.IPalTypeDbgSpy
@@ -263,6 +264,7 @@ class NdsDebugSession private constructor(
             obj: String,
             parameter: String = "",
         ): NdsDebugSession {
+            NdsClient.ensureClientCodePage()
             val io = Executors.newSingleThreadExecutor { r ->
                 Thread(r, "nds-debug-io").apply { isDaemon = true }
             }
